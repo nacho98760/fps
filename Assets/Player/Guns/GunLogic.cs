@@ -5,33 +5,31 @@ public class GunLogic : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
     [SerializeField] private AudioSource shotSound;
+    [SerializeField] private AudioClip shotSoundClip;
 
-    void Start()
-    {
-        
-    }
+    [SerializeField] float rifleFireRate = 10f; 
+
+    float nextFireTime = 0f;
 
     void Update()
     {
-        Ray raycast = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        Debug.DrawRay(raycast.origin, raycast.direction * 30f);
-
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
         {
             FireShot();
-            if (Physics.Raycast(raycast, out RaycastHit hit))
-            {
-                hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
-            }
+            nextFireTime = Time.time + 1f / rifleFireRate;
         }
     }
 
     // Check---
     private void FireShot()
     {
-        if (!shotSound.isPlaying)
+        shotSound.PlayOneShot(shotSoundClip);
+
+        Ray raycast = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+
+        if (Physics.Raycast(raycast, out RaycastHit hit))
         {
-            shotSound.Play();
+            hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
         }
     }
 }

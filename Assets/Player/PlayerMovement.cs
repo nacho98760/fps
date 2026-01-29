@@ -8,6 +8,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public CameraControls playerCameraControls;
 
+    [SerializeField] private AudioSource walkingSound;
+
+    private bool isPlayerMoving;
+    private bool isPlayerShifting;
+
     float movementSpeed = 2f;
     float jumpForce = 4f;
 
@@ -37,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        print(movementSpeed);
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, floorLayer);
 
         if (isGrounded)
@@ -50,10 +56,12 @@ public class PlayerMovement : MonoBehaviour
 
         MovePlayer(isGrounded);
         speedControl();
+        CheckForWalkingSound();
     }
 
     private void FixedUpdate()
     {
+        CheckIfPlayerIsShifting();
         movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         playerRigidBody.AddForce(movementDirection.normalized * movementSpeed, ForceMode.VelocityChange);
     }
@@ -86,6 +94,36 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 limitedVelocity = flatVelocity.normalized * movementSpeed;
             playerRigidBody.linearVelocity = new Vector3(limitedVelocity.x, playerRigidBody.linearVelocity.y, limitedVelocity.z);
+        }
+
+        isPlayerMoving = flatVelocity.magnitude > 0.1f;
+    }
+
+    private void CheckIfPlayerIsShifting()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
+            movementSpeed = 1f;
+            isPlayerShifting = true;
+        }
+        else
+        {
+            movementSpeed = 2f;
+            isPlayerShifting = false;
+        }
+    }
+
+    private void CheckForWalkingSound()
+    {
+        if (isPlayerMoving && !isPlayerShifting)
+        {
+            if (!walkingSound.isPlaying)
+            {
+                walkingSound.Play();
+            }
+        }
+        else
+        {
+            walkingSound.Stop();
         }
     }
 }
