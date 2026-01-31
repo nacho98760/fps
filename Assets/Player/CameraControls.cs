@@ -24,7 +24,7 @@ public class CameraControls : MonoBehaviour
 
         yRotation += mouseX * Time.deltaTime;
         xRotation -= mouseY * Time.deltaTime;
-        xRotation = Mathf.Clamp(xRotation, -45f, 45f);
+        xRotation = Mathf.Clamp(xRotation, -75f, 75f);
 
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
         player.gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);

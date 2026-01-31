@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - GravityButton
+  - SolidObjects
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - FloorLayer
+  - SolidObjectLayer
   - Water
   - UI
   - PlayerLayer

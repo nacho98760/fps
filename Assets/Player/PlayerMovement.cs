@@ -14,10 +14,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isPlayerShifting;
 
     float movementSpeed = 2f;
-    float jumpForce = 4f;
+    float jumpForce = 9f;
 
     public float playerHeight;
-    public LayerMask floorLayer;
+    public LayerMask solidObjectLayer;
 
     public float groundDrag;
 
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         print(movementSpeed);
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, floorLayer);
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, solidObjectLayer);
 
         if (isGrounded)
         {

@@ -7,9 +7,11 @@ public class GunLogic : MonoBehaviour
     [SerializeField] private AudioSource shotSound;
     [SerializeField] private AudioClip shotSoundClip;
 
-    [SerializeField] float rifleFireRate = 10f; 
+    [SerializeField] float rifleFireRate = 2f; 
 
     float nextFireTime = 0f;
+
+    public int floatingObjectsLive = 0;
 
     void Update()
     {
@@ -18,9 +20,11 @@ public class GunLogic : MonoBehaviour
             FireShot();
             nextFireTime = Time.time + 1f / rifleFireRate;
         }
+
+        print("FloatingObjects: " + floatingObjectsLive.ToString());
     }
 
-    // Check---
+
     private void FireShot()
     {
         shotSound.PlayOneShot(shotSoundClip);
@@ -29,7 +33,20 @@ public class GunLogic : MonoBehaviour
 
         if (Physics.Raycast(raycast, out RaycastHit hit))
         {
-            hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
+            if (hit.collider.GetComponent<GravityObject>())
+            {
+                GravityObject obj = hit.collider.GetComponent<GravityObject>();
+                obj.ToggleGravity();
+            }
+        }
+    }
+
+    private void CheckForMaximumAmountOfObjects()
+    {
+        if (floatingObjectsLive >= 3)
+        {
+            GravityObject[] objs = FindObjectsOfType<GravityObject>();
+
         }
     }
 }
