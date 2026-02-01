@@ -6,11 +6,12 @@ using UnityEngine.SocialPlatforms;
 public class GravityObject : MonoBehaviour
 {
     private Rigidbody rb;
-    public GunLogic GunLogicScript;
+    public GunLogic gravityActivationScript;
 
-    bool isLifting = false;
-    bool isFrozen = false;
+    public bool isLifting = false;
+    public bool isFrozen = false;
     Coroutine liftCoroutine;
+    Coroutine collapseCoroutine;
 
     void Awake()
     {
@@ -20,10 +21,7 @@ public class GravityObject : MonoBehaviour
     public void ToggleGravity()
     {
         if (isLifting)
-        {
-            StopLiftAndFreeze();
             return;
-        }
 
         if (isFrozen)
         {
@@ -33,7 +31,6 @@ public class GravityObject : MonoBehaviour
 
         if (!IsObjectGrounded())
             return;
-
 
         liftCoroutine = StartCoroutine(LiftAndFreeze());
     }
@@ -48,12 +45,9 @@ public class GravityObject : MonoBehaviour
 
         float timer = 0f;
 
-        GunLogicScript.floatingObjectsLive++;
-
         while (timer < 1f)
         {
-            //rb.AddForce(Vector3.up * 8f, ForceMode.Acceleration);
-            rb.MovePosition(rb.position + Vector3.up * 6f * Time.fixedDeltaTime);
+            rb.AddForce(Vector3.up * 8f, ForceMode.Acceleration);
             timer += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
         }
@@ -61,17 +55,9 @@ public class GravityObject : MonoBehaviour
         Freeze();
     }
 
-    void StopLiftAndFreeze()
-    {
-        if (liftCoroutine != null)
-            StopCoroutine(liftCoroutine);
-
-        isLifting = false;
-        Freeze();
-    }
-
     void Freeze()
     {
+        gravityActivationScript.floatingObjectsLive++;
         isFrozen = true;
         isLifting = false;
 
@@ -79,14 +65,37 @@ public class GravityObject : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        if (collapseCoroutine != null)
+            StopCoroutine(collapseCoroutine);
+
+        collapseCoroutine = StartCoroutine(StartCollapseCountdown());
     }
 
-    void Release()
+    public void Release()
     {
+        if (collapseCoroutine != null)
+        {
+            StopCoroutine(collapseCoroutine);
+            collapseCoroutine = null;
+        }
+
+        if (gravityActivationScript.floatingObjectsLive > 0)
+        {
+            gravityActivationScript.floatingObjectsLive--;
+        }
         isFrozen = false;
-        GunLogicScript.floatingObjectsLive--;
         rb.constraints = RigidbodyConstraints.None;
         rb.useGravity = true;
+    }
+
+    IEnumerator StartCollapseCountdown()
+    {
+        yield return new WaitForSeconds(5);
+        if (isFrozen)
+        {
+            Release();
+        }
     }
 
     bool IsObjectGrounded()
