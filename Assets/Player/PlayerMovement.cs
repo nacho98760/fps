@@ -15,7 +15,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioResource footstepsWhileSprinting;
 
     float movementSpeed = 2f;
-    float jumpForce = 4f;
+    float jumpForce = 3f;
+
+    bool isGrounded;
 
     float jumpCooldown = 1f;
     float nextJumpTime = 0f;
@@ -52,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, solidObjectLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, solidObjectLayer);
 
         if (isGrounded)
         {
@@ -60,28 +62,30 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            playerRigidBody.linearDamping = 0;
+            playerRigidBody.linearDamping = 0f;
         }
 
-        MovePlayer(isGrounded);
+        MovePlayer();
         speedControl();
-        CheckIfPlayerIsSprinting(isGrounded);
+        CheckIfPlayerIsSprinting();
         ManagePlayerMovespeed();
-        CheckForWalkingSound(isGrounded);
+        CheckForWalkingSound();
         ManageCameraFOV();
         ManageFootstepsVolume();
         ManageFootstepsSound();
+
+        print(isGrounded);
     }
 
     private void FixedUpdate()
     {
         movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
-        playerRigidBody.AddForce(movementDirection.normalized * movementSpeed, ForceMode.VelocityChange);
+        playerRigidBody.AddForce(movementDirection * movementSpeed * 25f, ForceMode.Acceleration);
     }
 
 
     // ----------------------------- Player Movement - START -----------------------------
-    private void MovePlayer(bool isGrounded)
+    private void MovePlayer()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
@@ -126,9 +130,9 @@ public class PlayerMovement : MonoBehaviour
         isPlayerMoving = (flatVelocity.magnitude > 0.1f);
     }
 
-    private void CheckIfPlayerIsSprinting(bool isGrounded)
+    private void CheckIfPlayerIsSprinting()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && isPlayerMoving && isGrounded && CanPlayerSprint())
+        if (Input.GetKey(KeyCode.LeftShift) && isPlayerMoving && isGrounded && CanPlayerSprint() && isPlayerWalkingForward())
         {
             isPlayerSprinting = true;
             nextSprintButtonTime = Time.time + sprintButtonCooldown;
@@ -151,6 +155,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool isPlayerWalkingForward()
+    {
+        return verticalInput == 1;
+    }
+
     private void ManagePlayerMovespeed()
     {
         float desiredSpeed = isPlayerSprinting ? 4f : 2f;
@@ -159,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
     // ----------------------------- Player Movement - END -----------------------------
 
 
-    private void CheckForWalkingSound(bool isGrounded)
+    private void CheckForWalkingSound()
     {
         if (isGrounded && isPlayerMoving)
         {

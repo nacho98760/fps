@@ -46,10 +46,6 @@ public class GunLogic : MonoBehaviour
                 obj.ToggleGravity();
                 StartCoroutine(ManagePlayerActivationCooldown());
             }
-            else
-            {
-                print("cant yet!");
-            }
         }
     }
 
