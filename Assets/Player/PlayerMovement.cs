@@ -73,14 +73,19 @@ public class PlayerMovement : MonoBehaviour
         ManageCameraFOV();
         ManageFootstepsVolume();
         ManageFootstepsSound();
-
-        print(isGrounded);
     }
 
     private void FixedUpdate()
     {
         movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         playerRigidBody.AddForce(movementDirection * movementSpeed * 25f, ForceMode.Acceleration);
+
+        //Keep an eye on this
+        if (isGrounded && movementDirection.sqrMagnitude < 0.01f)
+        {
+            Vector3 v = playerRigidBody.linearVelocity;
+            playerRigidBody.linearVelocity = new Vector3(0f, v.y, 0f);
+        }
     }
 
 

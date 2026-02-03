@@ -1,11 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class GunLogic : MonoBehaviour
+public class GravityActivationLogic : MonoBehaviour
 {
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private AudioSource shotSound;
-    [SerializeField] private AudioClip shotSoundClip;
 
     GravityObject[] gravityObjects;
     bool isPlayerActivationOnCooldown = false;
@@ -29,7 +27,6 @@ public class GunLogic : MonoBehaviour
         }
 
         CheckForMaxObjects();
-        print("FloatingObjects: " + floatingObjectsLive.ToString());
     }
 
 

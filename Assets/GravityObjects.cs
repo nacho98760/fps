@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms;
 public class GravityObject : MonoBehaviour
 {
     private Rigidbody rb;
-    public GunLogic gravityActivationScript;
+    public GravityActivationLogic gravityActivationScript;
 
     public bool isLifting = false;
     public bool isFrozen = false;
