@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GravityButton
   - SolidObjects
+  - Interactables
   layers:
   - Default
   - TransparentFX

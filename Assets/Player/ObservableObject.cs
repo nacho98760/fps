@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class ObservableObject : MonoBehaviour
 {
-    public Vector3 objOriginalPosition;
-    public Vector3 objFirstStatePosition;
-    public bool isItFirstTimeObservation;
-    public bool isCurrentlyObserved;
+    Vector3 objSecondStatePosition;
+    int observationState;
+    bool alreadyChangedStateInThisObservation;
 
     [SerializeField] private Camera playerCamera;
     [SerializeField] private LayerMask observableObjLayer;
@@ -15,48 +14,51 @@ public class ObservableObject : MonoBehaviour
     {
         objRenderer = GetComponent<Renderer>();
     }
-
-    void Start()
+    private void Start()
     {
-        isItFirstTimeObservation = true;
-        objOriginalPosition = transform.position;
-        objFirstStatePosition = objOriginalPosition + new Vector3(0f, 0f, 6f);
+        objSecondStatePosition = transform.position + new Vector3(0f, 0f, 2f);
+        alreadyChangedStateInThisObservation = false;
     }
 
     void Update()
     {
-        print(objRenderer.isVisible);
-        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * 25f, Color.red);
         if (objRenderer.isVisible)
         {
             if (HasLineOfSight())
             {
-                if (isItFirstTimeObservation)
+                if (alreadyChangedStateInThisObservation == false)
                 {
-                    isItFirstTimeObservation = false;
+                    alreadyChangedStateInThisObservation = true;
+                    observationState++;
                     return;
                 }
             }
             else
             {
-                if (isItFirstTimeObservation == false)
-                {
-                    MoveObject();
-                }
+                MoveObject(observationState);
             }
         }
         else
         {
-            if (isItFirstTimeObservation == false)
-            {
-                MoveObject();
-            }
+            MoveObject(observationState);
         }
     }
 
-    void MoveObject()
+    void MoveObject(int state)
     {
-        transform.position = objFirstStatePosition;
+        alreadyChangedStateInThisObservation = false;
+        if (state == 1)
+        {
+            transform.rotation = Quaternion.Euler(0f, 210f, 0f);
+        }
+        else if (state == 2)
+        {
+            transform.position = objSecondStatePosition;
+        }
+        else
+        {
+            return;
+        }
     }
 
     bool HasLineOfSight()

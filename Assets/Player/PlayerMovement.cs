@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
 
-    float jumpCooldown = 1f;
-    float nextJumpTime = 0f;
+    float jumpCooldown = 1f; //Button cooldown so the player cant spam jumping
+    float nextJumpTime = 0f; // When can the player jump again
 
     bool isPlayerMoving;
     bool isPlayerSprinting;
@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         ManageCameraFOV();
         ManageFootstepsVolume();
         ManageFootstepsSound();
+        CheckForInteractableObjects();
     }
 
     private void FixedUpdate()
@@ -83,8 +84,7 @@ public class PlayerMovement : MonoBehaviour
         //Keep an eye on this
         if (isGrounded && movementDirection.sqrMagnitude < 0.01f)
         {
-            Vector3 v = playerRigidBody.linearVelocity;
-            playerRigidBody.linearVelocity = new Vector3(0f, v.y, 0f);
+            playerRigidBody.linearVelocity = new Vector3(0f, playerRigidBody.linearVelocity.y, 0f);
         }
     }
 
@@ -210,6 +210,27 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             footstepsSound.resource = footstepsWhileWalking;
+        }
+    }
+
+    void CheckForInteractableObjects()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.CompareTag("Interactables"))
+                {
+                    if (hit.collider.GetComponent<CheckForOpenOrClose>())
+                    {
+                        CheckForOpenOrClose doorScript = hit.collider.GetComponent<CheckForOpenOrClose>();
+
+                        doorScript.isDoorClosed = !doorScript.isDoorClosed;
+                    }
+                }
+            }
         }
     }
 }
