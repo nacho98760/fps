@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ObservableObject : MonoBehaviour
 {
-    Vector3 objSecondStatePosition;
     int observationState;
     bool alreadyChangedStateInThisObservation;
 
@@ -16,7 +15,6 @@ public class ObservableObject : MonoBehaviour
     }
     private void Start()
     {
-        objSecondStatePosition = transform.position + new Vector3(0f, 0f, 2f);
         alreadyChangedStateInThisObservation = false;
     }
 
@@ -50,10 +48,6 @@ public class ObservableObject : MonoBehaviour
         if (state == 1)
         {
             transform.rotation = Quaternion.Euler(0f, 210f, 0f);
-        }
-        else if (state == 2)
-        {
-            transform.position = objSecondStatePosition;
         }
         else
         {

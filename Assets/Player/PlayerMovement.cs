@@ -2,8 +2,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using static UnityEditor.IMGUI.Controls.PrimitiveBoundsHandle;
-using static UnityEditor.Progress;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,19 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioResource footstepsWhileWalking;
     [SerializeField] private AudioResource footstepsWhileSprinting;
 
-    float movementSpeed = 2f;
-    float jumpForce = 3f;
+    float movementSpeed = 1.5f;
 
     bool isGrounded;
 
-    float jumpCooldown = 1f; //Button cooldown so the player cant spam jumping
-    float nextJumpTime = 0f; // When can the player jump again
-
     bool isPlayerMoving;
-    bool isPlayerSprinting;
-
-    float sprintButtonCooldown = 1f; //Button cooldown so the player cant spam Walking/Sprinting
-    float nextSprintButtonTime = 1f; // When can the player activate the sprint button again
 
     public float playerHeight;
     public LayerMask solidObjectLayer;
@@ -67,12 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
         MovePlayer();
         speedControl();
-        CheckIfPlayerIsSprinting();
-        ManagePlayerMovespeed();
         CheckForWalkingSound();
-        ManageCameraFOV();
-        ManageFootstepsVolume();
-        ManageFootstepsSound();
         CheckForInteractableObjects();
     }
 
@@ -94,11 +79,6 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && CanPlayerJump())
-        {
-            Jump();
-        }
         
         //Extra fall gravity tp make the jump less smooth
         if (playerRigidBody.linearVelocity.y < 0)
@@ -106,21 +86,6 @@ public class PlayerMovement : MonoBehaviour
             playerRigidBody.AddForce(Vector3.down * 2.5f, ForceMode.Acceleration);
         }
     }
-
-    private void Jump()
-    {
-        playerRigidBody.linearVelocity = new Vector3(playerRigidBody.linearVelocity.x, 0f, playerRigidBody.linearVelocity.z);
-
-        playerRigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
-        nextJumpTime = Time.time + jumpCooldown;
-    }
-
-    private bool CanPlayerJump()
-    {
-        return Time.time >= nextJumpTime;
-    }
-
 
     private void speedControl()
     {
@@ -133,42 +98,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isPlayerMoving = (flatVelocity.magnitude > 0.1f);
-    }
-
-    private void CheckIfPlayerIsSprinting()
-    {
-        if (Input.GetKey(KeyCode.LeftShift) && isPlayerMoving && isGrounded && CanPlayerSprint() && isPlayerWalkingForward())
-        {
-            isPlayerSprinting = true;
-            nextSprintButtonTime = Time.time + sprintButtonCooldown;
-        }
-        else
-        {
-            isPlayerSprinting = false;
-        }
-    }
-
-    private bool CanPlayerSprint()
-    {
-        if (isPlayerSprinting)
-        {
-            return true;
-        }
-        else
-        {
-            return Time.time >= nextSprintButtonTime;
-        }
-    }
-
-    private bool isPlayerWalkingForward()
-    {
-        return verticalInput == 1;
-    }
-
-    private void ManagePlayerMovespeed()
-    {
-        float desiredSpeed = isPlayerSprinting ? 4f : 2f;
-        movementSpeed = Mathf.Lerp(movementSpeed, desiredSpeed, 10f * Time.deltaTime);
     }
     // ----------------------------- Player Movement - END -----------------------------
 
@@ -185,31 +114,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             footstepsSound.Stop();
-        }
-    }
-
-    private void ManageCameraFOV()
-    {
-        //This tells the player: Change from "X" speed (60f) to "Y" speed (75f) in "Z" seconds (10f * Time.deltaTime)
-        float desiredFov = isPlayerSprinting ? 75f : 60f;
-        playerCamera.fieldOfView = Mathf.Lerp( playerCamera.fieldOfView,desiredFov, 10f * Time.deltaTime);
-    }
-
-    private void ManageFootstepsVolume()
-    {
-        float desiredSound = isPlayerSprinting ? 1f : 0.35f;
-        footstepsSound.volume = Mathf.Lerp(footstepsSound.volume, desiredSound, 10f * Time.deltaTime);
-    }
-
-    private void ManageFootstepsSound()
-    {
-        if (isPlayerSprinting)
-        {
-            footstepsSound.resource = footstepsWhileSprinting;
-        }
-        else
-        {
-            footstepsSound.resource = footstepsWhileWalking;
         }
     }
 
