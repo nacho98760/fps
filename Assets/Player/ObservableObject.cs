@@ -20,6 +20,7 @@ public class ObservableObject : MonoBehaviour
 
     void Update()
     {
+        print(HasLineOfSight());
         if (objRenderer.isVisible)
         {
             if (HasLineOfSight())
@@ -59,7 +60,7 @@ public class ObservableObject : MonoBehaviour
     {
         Vector3 direction = (transform.position - playerCamera.transform.position).normalized;
 
-        if (Physics.Raycast(playerCamera.transform.position, direction, out RaycastHit hit, 30f, observableObjLayer))
+        if (Physics.Raycast(playerCamera.transform.position, direction, out RaycastHit hit, 30f))
         {
             return hit.transform == transform;
         }

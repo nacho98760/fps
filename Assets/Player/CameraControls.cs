@@ -11,14 +11,35 @@ public class CameraControls : MonoBehaviour
     float xRotation;
     float yRotation;
 
-    void Start()
+    bool mouseInitialized = false;
+
+    void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        xRotation = transform.localEulerAngles.x;
+        yRotation = transform.eulerAngles.y;
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            mouseInitialized = false; // re-sync mouse
+        }
     }
 
     void Update()
     {
+        if (!mouseInitialized)
+        {
+            mouseInitialized = true;
+            return; // skip first frame
+        }
+
         float mouseX = Input.GetAxisRaw("Mouse X") * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * sensY;
 
@@ -29,4 +50,5 @@ public class CameraControls : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
         player.gameObject.transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
+
 }
