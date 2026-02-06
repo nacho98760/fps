@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioResource footstepsWhileWalking;
     [SerializeField] private AudioResource footstepsWhileSprinting;
 
-    float movementSpeed = 1.5f;
+    float movementSpeed = 1.7f;
 
     bool isGrounded;
 
@@ -122,8 +122,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask layer = ~LayerMask.GetMask("Ignore Raycast"); //Putting the "~" symbol at the start of the function makes the raycast hit everything except the 'IgnoreRaycast' mask
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, 20f, layer))
             {
                 if (hit.collider.CompareTag("Interactables"))
                 {

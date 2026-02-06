@@ -20,7 +20,6 @@ public class ObservableObject : MonoBehaviour
 
     void Update()
     {
-        print(HasLineOfSight());
         if (objRenderer.isVisible)
         {
             if (HasLineOfSight())
@@ -48,7 +47,7 @@ public class ObservableObject : MonoBehaviour
         alreadyChangedStateInThisObservation = false;
         if (state == 1)
         {
-            transform.rotation = Quaternion.Euler(0f, 210f, 0f);
+            transform.rotation = Quaternion.Euler(0f, 200f, 0f);
         }
         else
         {

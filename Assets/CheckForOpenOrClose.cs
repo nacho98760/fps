@@ -6,7 +6,6 @@ public class CheckForOpenOrClose : MonoBehaviour
 {
     Vector3 doorClosedPosition;
     Quaternion doorClosedRotation;
-
     Vector3 doorOpenedPosition;
     Quaternion doorOpenedRotation;
 

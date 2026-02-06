@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraControls : MonoBehaviour
 {
 
-    float sensX = 200f;
-    float sensY = 200f;
+    float sensX = 180f;
+    float sensY = 180f;
 
     public PlayerMovement player;
 
@@ -22,6 +22,7 @@ public class CameraControls : MonoBehaviour
         yRotation = transform.eulerAngles.y;
     }
 
+    //Adding onFocus in case user tabs out the game and back, so cursor and camera angle are re-positioned correctly
     void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus)
