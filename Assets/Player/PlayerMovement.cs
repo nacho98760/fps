@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public string playerCurrentRoom;
+
     public CameraControls playerCameraControls;
     public Camera playerCamera;
 
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        playerCurrentRoom = "Room1";
         playerRigidBody = GetComponent<Rigidbody>();
         playerRigidBody.freezeRotation = true;
     }

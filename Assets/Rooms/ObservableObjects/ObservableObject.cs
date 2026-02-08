@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObservableObject : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+
     public DecayProfile decayProfile;
 
     public float Stability { get; private set; }
@@ -19,6 +21,7 @@ public class ObservableObject : MonoBehaviour
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         objRenderer = GetComponent<Renderer>();
     }
     private void Start()
@@ -30,8 +33,9 @@ public class ObservableObject : MonoBehaviour
     {
         UpdateObservation();
 
-        if (usesStability)
+        if (transform.root.name == player.GetComponent<PlayerMovement>().playerCurrentRoom && usesStability)
         {
+            print(Stability);
             UpdateStability();
         }
     }
