@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class CheckWhichRoomThePlayerIsAt : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private PlayerMovement playerScript;
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = FindFirstObjectByType<PlayerMovement>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (transform.root.name != player.GetComponent<PlayerMovement>().playerCurrentRoom)
+            if (transform.root.name != playerScript.playerCurrentRoom)
             {
-                player.GetComponent<PlayerMovement>().playerCurrentRoom = transform.root.name;
+                playerScript.playerCurrentRoom = transform.root.name;
             }
         }
     }

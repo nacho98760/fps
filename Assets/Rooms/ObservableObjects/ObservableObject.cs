@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ObservableObject : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private PlayerMovement playerScript;
 
     public DecayProfile decayProfile;
 
@@ -21,7 +21,7 @@ public class ObservableObject : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = FindFirstObjectByType<PlayerMovement>();
         objRenderer = GetComponent<Renderer>();
     }
     private void Start()
@@ -29,14 +29,13 @@ public class ObservableObject : MonoBehaviour
         Stability = decayProfile.maxStability;
     }
 
-    void Update()
+    private void Update()
     {
         UpdateObservation();
 
-        if (transform.root.name == player.GetComponent<PlayerMovement>().playerCurrentRoom && usesStability)
+        if (usesStability)
         {
-            print(Stability);
-            UpdateStability();
+            CheckToUpdateStability();
         }
     }
 
@@ -94,7 +93,7 @@ public class ObservableObject : MonoBehaviour
         Vector3 toObject = (chairCollider.bounds.center - playerCamera.transform.position).normalized;
         float dot = Vector3.Dot(playerCamera.transform.forward, toObject);
 
-        if (dot < 0.9f) return false;
+        if (dot < 0.95f) return false;
 
         Vector3 direction = (transform.position - playerCamera.transform.position).normalized;
 
@@ -106,25 +105,29 @@ public class ObservableObject : MonoBehaviour
         return false;
     }
 
-    void UpdateStability()
+    void CheckToUpdateStability()
     {
-        if (isFocused)
+        if (transform.root.name == playerScript.playerCurrentRoom)
         {
-            decayTimer = 0f;
-            Stability += decayProfile.recoveryRate * Time.deltaTime;
-        }
-        else
-        {
-            decayTimer += Time.deltaTime;
-            if (decayTimer >= decayProfile.decayDelay)
-                Stability -= decayProfile.decayRate * Time.deltaTime;
-        }
+            print(Stability);
+            if (isFocused)
+            {
+                decayTimer = 0f;
+                Stability += decayProfile.recoveryRate * Time.deltaTime;
+            }
+            else
+            {
+                decayTimer += Time.deltaTime;
+                if (decayTimer >= decayProfile.decayDelay)
+                    Stability -= decayProfile.decayRate * Time.deltaTime;
+            }
 
-        Stability = Mathf.Clamp(
-            Stability,
-            decayProfile.minStability,
-            decayProfile.maxStability
-        );
+            Stability = Mathf.Clamp(
+                Stability,
+                decayProfile.minStability,
+                decayProfile.maxStability
+            );
+        }
     }
 
 }

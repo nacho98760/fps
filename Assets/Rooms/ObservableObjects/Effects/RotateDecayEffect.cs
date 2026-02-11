@@ -19,7 +19,7 @@ public class RotateDecayEffect : MonoBehaviour
     {
         float stability = observable.Stability;
 
-        if (stability > stabilityThresholdToActivateBelow)
+        if (stability >= stabilityThresholdToActivateBelow)
             return;
 
         float t = Mathf.InverseLerp(stabilityThresholdToActivateBelow, 0f, stability);
