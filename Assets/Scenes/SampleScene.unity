@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 100854074}
   - component: {fileID: 100854073}
   m_Layer: 0
-  m_Name: RoofSpotLight (10)
+  m_Name: RoofSpotLight (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 185065170}
   - component: {fileID: 185065169}
   - component: {fileID: 185065168}
-  - component: {fileID: 185065167}
+  - component: {fileID: 185065171}
   m_Layer: 2
   m_Name: Room2TriggerCollider
   m_TagString: Untagged
@@ -725,18 +725,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1850081673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &185065167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185065165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 893eaa0153aeab74fba9e23d34ee60c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Room2Script
 --- !u!65 &185065168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -752,7 +740,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -814,6 +802,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185065165}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &185065171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185065165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893eaa0153aeab74fba9e23d34ee60c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Room2TriggerEventScript
 --- !u!1 &207711336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1785,7 @@ Transform:
   m_GameObject: {fileID: 408204512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -0.004, y: 1.066, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4139,6 +4139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1073358147}
+  - component: {fileID: 1073358148}
   m_Layer: 0
   m_Name: Room4
   m_TagString: Untagged
@@ -4177,6 +4178,21 @@ Transform:
   - {fileID: 2068696716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073358148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073358146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55414d5ef5c15ef41aa17e8392e668ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomScript
+  roofSpotlightsInRoom:
+  - {fileID: 207711336}
+  - {fileID: 1713118823}
 --- !u!1 &1156534271
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,6 +4510,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6cb45341e76aa49af063d702374444, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1179515936}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6cb45341e76aa49af063d702374444, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1179515939}
   m_SourcePrefab: {fileID: 100100000, guid: ff6cb45341e76aa49af063d702374444, type: 3}
 --- !u!4 &1179515934 stripped
 Transform:
@@ -4533,7 +4552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObservableObject
   decayProfile: {fileID: 11400000, guid: e8c75a5cc64b03048aaaf41581ee5553, type: 2}
-  usesStability: 0
+  usesStability: 1
   isObserved: 0
   isFocused: 0
   playerCamera: {fileID: 330585545}
@@ -4561,6 +4580,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 1.2166978, z: 0.6}
   m_Center: {x: 0, y: 0.45346624, z: 0}
+--- !u!114 &1179515939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179515935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc377bef0494aa04fa9803ce58e69efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlickeringEffect
 --- !u!1 &1180414309
 GameObject:
   m_ObjectHideFlags: 0
@@ -4906,7 +4937,7 @@ GameObject:
   - component: {fileID: 1249788242}
   - component: {fileID: 1249788241}
   m_Layer: 0
-  m_Name: RoofSpotLight (11)
+  m_Name: RoofSpotLight (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5229,6 +5260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348446615}
+  - component: {fileID: 1348446616}
   m_Layer: 0
   m_Name: Room1
   m_TagString: Untagged
@@ -5261,6 +5293,21 @@ Transform:
   - {fileID: 902318904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348446616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348446614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55414d5ef5c15ef41aa17e8392e668ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomScript
+  roofSpotlightsInRoom:
+  - {fileID: 234860788}
+  - {fileID: 902318903}
 --- !u!1 &1349540682
 GameObject:
   m_ObjectHideFlags: 0
@@ -6625,6 +6672,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6cb45341e76aa49af063d702374444, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1714761891}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6cb45341e76aa49af063d702374444, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1714761894}
   m_SourcePrefab: {fileID: 100100000, guid: ff6cb45341e76aa49af063d702374444, type: 3}
 --- !u!4 &1714761889 stripped
 Transform:
@@ -6664,7 +6714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObservableObject
   decayProfile: {fileID: 11400000, guid: e8c75a5cc64b03048aaaf41581ee5553, type: 2}
-  usesStability: 0
+  usesStability: 1
   isObserved: 0
   isFocused: 0
   playerCamera: {fileID: 330585545}
@@ -6692,6 +6742,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 1.2166978, z: 0.6}
   m_Center: {x: 0, y: 0.45346624, z: 0}
+--- !u!114 &1714761894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714761890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc377bef0494aa04fa9803ce58e69efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlickeringEffect
 --- !u!1 &1728391956
 GameObject:
   m_ObjectHideFlags: 0
@@ -7277,6 +7339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1850081673}
+  - component: {fileID: 1850081674}
   m_Layer: 0
   m_Name: Room2
   m_TagString: Untagged
@@ -7314,6 +7377,21 @@ Transform:
   - {fileID: 185065166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1850081674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850081672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55414d5ef5c15ef41aa17e8392e668ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomScript
+  roofSpotlightsInRoom:
+  - {fileID: 526861711}
+  - {fileID: 594996476}
 --- !u!1 &1918496094
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,6 +7734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012242419}
+  - component: {fileID: 2012242420}
   m_Layer: 0
   m_Name: Room3
   m_TagString: Untagged
@@ -7692,6 +7771,21 @@ Transform:
   - {fileID: 1249788240}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2012242420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012242418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55414d5ef5c15ef41aa17e8392e668ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomScript
+  roofSpotlightsInRoom:
+  - {fileID: 100854071}
+  - {fileID: 1249788239}
 --- !u!1001 &2068696715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7769,6 +7863,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6cb45341e76aa49af063d702374444, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2068696718}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6cb45341e76aa49af063d702374444, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2068696721}
   m_SourcePrefab: {fileID: 100100000, guid: ff6cb45341e76aa49af063d702374444, type: 3}
 --- !u!4 &2068696716 stripped
 Transform:
@@ -7808,7 +7905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObservableObject
   decayProfile: {fileID: 11400000, guid: e8c75a5cc64b03048aaaf41581ee5553, type: 2}
-  usesStability: 0
+  usesStability: 1
   isObserved: 0
   isFocused: 0
   playerCamera: {fileID: 330585545}
@@ -7836,6 +7933,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 1.2166978, z: 0.6}
   m_Center: {x: 0, y: 0.45346624, z: 0}
+--- !u!114 &2068696721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068696717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc377bef0494aa04fa9803ce58e69efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlickeringEffect
 --- !u!1 &2085830379
 GameObject:
   m_ObjectHideFlags: 0

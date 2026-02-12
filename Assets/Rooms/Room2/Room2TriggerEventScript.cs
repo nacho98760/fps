@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Room2Script : MonoBehaviour
+public class Room2TriggerEventScript : MonoBehaviour
 {
     bool didRoom2DoorEventHappened = false;
 
