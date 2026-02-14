@@ -8270,7 +8270,6 @@ MonoBehaviour:
   playerCameraControls: {fileID: 330585548}
   playerCamera: {fileID: 330585545}
   footstepsSound: {fileID: 594402573}
-  breathingSound: {fileID: 0}
   playerHeight: 2
   solidObjectLayer:
     serializedVersion: 2

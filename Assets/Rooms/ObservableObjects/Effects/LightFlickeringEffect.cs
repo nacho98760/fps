@@ -32,7 +32,7 @@ public class LightFlickeringEffect : MonoBehaviour
     {
         float baseIntensity = 8f;
 
-        while (obj.Stability <= 0.7f) 
+        while (obj.Stability <= 0.8f) 
         {
             spotlight.GetComponent<Light>().intensity = UnityEngine.Random.Range(0.5f, baseIntensity);
 
