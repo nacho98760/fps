@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraControls : MonoBehaviour
 {
 
-    float sensX = 180f;
-    float sensY = 180f;
+    float sensX = 150f;
+    float sensY = 150f;
 
     public PlayerMovement player;
 

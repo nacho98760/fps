@@ -79,7 +79,7 @@ public class ObservableObject : MonoBehaviour
 
         Vector3 direction = (transform.position - playerCamera.transform.position).normalized;
 
-        if (Physics.Raycast(playerCamera.transform.position, direction, out RaycastHit hit, 25f))
+        if (Physics.Raycast(playerCamera.transform.position, direction, out RaycastHit hit, 20f))
         {
             return hit.transform == transform;
         }
@@ -93,7 +93,7 @@ public class ObservableObject : MonoBehaviour
         Vector3 toObject = (chairCollider.bounds.center - playerCamera.transform.position).normalized;
         float dot = Vector3.Dot(playerCamera.transform.forward, toObject);
 
-        if (dot < 0.95f) return false;
+        if (dot < 0.97f) return false;
 
         Vector3 direction = (transform.position - playerCamera.transform.position).normalized;
 
@@ -109,7 +109,6 @@ public class ObservableObject : MonoBehaviour
     {
         if (transform.root.name == playerScript.playerCurrentRoom)
         {
-            print(Stability);
             if (isFocused)
             {
                 decayTimer = 0f;

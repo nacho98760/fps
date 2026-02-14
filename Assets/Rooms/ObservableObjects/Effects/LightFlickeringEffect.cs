@@ -8,7 +8,6 @@ public class LightFlickeringEffect : MonoBehaviour
 {
     RoomScript objRoomScript;
     ObservableObject obj;
-    bool flickeringAlreadyTriggered;
 
     private void Awake()
     {
@@ -37,7 +36,7 @@ public class LightFlickeringEffect : MonoBehaviour
         {
             spotlight.GetComponent<Light>().intensity = UnityEngine.Random.Range(0.5f, baseIntensity);
 
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.2f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.15f, 0.3f));
         }
 
         spotlight.GetComponent<Light>().intensity = baseIntensity;

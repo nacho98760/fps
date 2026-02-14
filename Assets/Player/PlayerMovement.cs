@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     public Camera playerCamera;
 
     [SerializeField] private AudioSource footstepsSound;
-    [SerializeField] private AudioResource footstepsWhileWalking;
-    [SerializeField] private AudioResource footstepsWhileSprinting;
 
     float movementSpeed = 1.7f;
 
