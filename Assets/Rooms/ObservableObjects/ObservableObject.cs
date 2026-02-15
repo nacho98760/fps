@@ -11,7 +11,6 @@ public class ObservableObject : MonoBehaviour
 
     public bool usesStability;
 
-    public bool isObserved;
     public bool isFocused;
     float decayTimer;
 
@@ -41,50 +40,14 @@ public class ObservableObject : MonoBehaviour
 
     void UpdateObservation()
     {
-
-        if (objRenderer.isVisible == false)
+        if (objRenderer.isVisible && IsBeingFocused())
         {
-            isObserved = false;
-            isFocused = false;
-            return;
-        }
-
-        if (IsWithinRange())
-        {
-            isObserved = true;
-
-            if (IsBeingFocused())
-            {
-                isFocused = true;
-            }
-            else
-            {
-                isFocused = false;
-            }
+            isFocused = true;
         }
         else
         {
-            isObserved = false;
             isFocused = false;
         }
-    }
-
-    bool IsWithinRange()
-    {
-        BoxCollider chairCollider = GetComponent<BoxCollider>();
-        Vector3 toObject = (chairCollider.bounds.center - playerCamera.transform.position).normalized;
-        float dot = Vector3.Dot(playerCamera.transform.forward, toObject);
-
-        if (dot < 0.62f) return false;
-
-        Vector3 direction = (transform.position - playerCamera.transform.position).normalized;
-
-        if (Physics.Raycast(playerCamera.transform.position, direction, out RaycastHit hit, 20f))
-        {
-            return hit.transform == transform;
-        }
-
-        return false;
     }
 
     bool IsBeingFocused()

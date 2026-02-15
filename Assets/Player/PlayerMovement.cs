@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public string playerCurrentRoom;
+    [SerializeField] Transform firstRoomSpawnPoint;
 
     public CameraControls playerCameraControls;
     public Camera playerCamera;
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         playerCurrentRoom = "Room1";
         playerRigidBody = GetComponent<Rigidbody>();
         playerRigidBody.freezeRotation = true;
+        transform.position = firstRoomSpawnPoint.position;
     }
 
 
@@ -57,9 +59,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         MovePlayer();
-        speedControl();
+        SpeedControl();
         CheckForWalkingSound();
-        CheckForInteractableObjects();
     }
 
     private void FixedUpdate()
@@ -88,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void speedControl()
+    private void SpeedControl()
     {
         Vector3 flatVelocity = new Vector3(playerRigidBody.linearVelocity.x, 0f, playerRigidBody.linearVelocity.z);
 
@@ -118,6 +119,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+    //--------- Door Script ---------
+    /*
     void CheckForInteractableObjects()
     {
         if (Input.GetMouseButtonDown(0))
@@ -139,4 +143,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    */
+    //--------- Door Script ---------
 }
