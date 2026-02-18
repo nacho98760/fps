@@ -4,6 +4,7 @@ using UnityEngine;
 public class ObservableObject : MonoBehaviour
 {
     private PlayerMovement playerScript;
+    private Renderer objRenderer;
 
     public DecayProfile decayProfile;
 
@@ -12,11 +13,9 @@ public class ObservableObject : MonoBehaviour
     public bool usesStability;
 
     public bool isFocused;
-    float decayTimer;
 
     [SerializeField] private Camera playerCamera;
     [SerializeField] private LayerMask observableObjLayer;
-    Renderer objRenderer;
 
     void Awake()
     {
@@ -74,14 +73,11 @@ public class ObservableObject : MonoBehaviour
         {
             if (isFocused)
             {
-                decayTimer = 0f;
-                Stability += decayProfile.recoveryRate * Time.deltaTime;
+                Stability -= decayProfile.focusedDecayRate * Time.deltaTime;
             }
             else
             {
-                decayTimer += Time.deltaTime;
-                if (decayTimer >= decayProfile.decayDelay)
-                    Stability -= decayProfile.decayRate * Time.deltaTime;
+                Stability -= decayProfile.nonFocusedDecayRate * Time.deltaTime;
             }
 
             Stability = Mathf.Clamp(

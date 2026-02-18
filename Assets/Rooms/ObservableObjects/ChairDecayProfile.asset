@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DecayProfile
   maxStability: 1
   minStability: 0
-  decayRate: 0.15
-  recoveryRate: 0.33
+  focusedDecayRate: 0.015
+  nonFocusedDecayRate: 0.07
   decayDelay: 0

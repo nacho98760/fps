@@ -6,8 +6,8 @@ public class DecayProfile : ScriptableObject
     public float maxStability;
     public float minStability;
 
-    public float decayRate;
-    public float recoveryRate;
+    public float focusedDecayRate;
+    public float nonFocusedDecayRate;
 
     public float decayDelay;
 }
