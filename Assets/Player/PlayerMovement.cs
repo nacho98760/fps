@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
         SpeedControl();
         CheckForWalkingSound();
+        CheckForInteractableObjects();
     }
 
     private void FixedUpdate()
@@ -119,9 +120,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-    //--------- Door Script ---------
-    /*
     void CheckForInteractableObjects()
     {
         if (Input.GetMouseButtonDown(0))
@@ -143,6 +141,4 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    */
-    //--------- Door Script ---------
 }

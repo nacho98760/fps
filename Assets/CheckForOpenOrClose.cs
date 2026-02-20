@@ -17,8 +17,8 @@ public class CheckForOpenOrClose : MonoBehaviour
         doorClosedPosition = transform.localPosition;
         doorClosedRotation = transform.localRotation;
 
-        doorOpenedPosition = doorClosedPosition + new Vector3(-0.905f, 0f, -0.717f);
-        doorOpenedRotation = doorClosedRotation * Quaternion.Euler(0f, -90f, 0f);
+        doorOpenedPosition = doorClosedPosition + new Vector3(0.706f, 0f, -0.74f);
+        doorOpenedRotation = doorClosedRotation * Quaternion.Euler(0f, 90f, 0f);
     }
 
     private void Update()
@@ -26,7 +26,7 @@ public class CheckForOpenOrClose : MonoBehaviour
         Vector3 targetPosition = isDoorClosed ? doorClosedPosition : doorOpenedPosition;
         Quaternion targetRotation = isDoorClosed ? doorClosedRotation : doorOpenedRotation;
 
-        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * 10f);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * 7f);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * 7f);
     }
 }
