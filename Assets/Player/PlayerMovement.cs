@@ -1,4 +1,6 @@
+using System;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -31,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody playerRigidBody;
 
+
     private void Awake()
     {
-        Application.targetFrameRate = 180;
+        Application.targetFrameRate = 120;
     }
 
     private void Start()
@@ -47,6 +50,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        MovePlayer();
+        SpeedControl();
+        CheckForWalkingSound();
+    }
+
+    private void FixedUpdate()
+    {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, solidObjectLayer);
 
         if (isGrounded)
@@ -58,14 +68,6 @@ public class PlayerMovement : MonoBehaviour
             playerRigidBody.linearDamping = 0f;
         }
 
-        MovePlayer();
-        SpeedControl();
-        CheckForWalkingSound();
-        CheckForInteractableObjects();
-    }
-
-    private void FixedUpdate()
-    {
         movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
         playerRigidBody.AddForce(movementDirection * movementSpeed * 25f, ForceMode.Acceleration);
 
@@ -117,28 +119,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             footstepsSound.Stop();
-        }
-    }
-
-    void CheckForInteractableObjects()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            LayerMask layer = ~LayerMask.GetMask("Ignore Raycast"); //Putting the "~" symbol at the start of the function makes the raycast hit everything except the 'IgnoreRaycast' mask
-
-            if (Physics.Raycast(ray, out RaycastHit hit, 20f, layer))
-            {
-                if (hit.collider.CompareTag("Interactables"))
-                {
-                    if (hit.collider.GetComponent<CheckForOpenOrClose>())
-                    {
-                        CheckForOpenOrClose doorScript = hit.collider.GetComponent<CheckForOpenOrClose>();
-
-                        doorScript.isDoorClosed = !doorScript.isDoorClosed;
-                    }
-                }
-            }
         }
     }
 }
