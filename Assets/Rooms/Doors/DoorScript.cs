@@ -5,9 +5,7 @@ public class DoorScript : MonoBehaviour
 {
     public event Action<bool> OnDoorStateChanged;
 
-    Vector3 doorClosedPosition;
     Quaternion doorClosedRotation;
-    Vector3 doorOpenedPosition;
     Quaternion doorOpenedRotation;
 
     public bool isDoorClosed;
@@ -15,10 +13,8 @@ public class DoorScript : MonoBehaviour
     void Start()
     {
         isDoorClosed = true;
-        doorClosedPosition = transform.localPosition;
         doorClosedRotation = transform.localRotation;
 
-        doorOpenedPosition = doorClosedPosition + new Vector3(0.706f, 0f, -0.74f);
         doorOpenedRotation = doorClosedRotation * Quaternion.Euler(0f, 90f, 0f);
     }
 
@@ -44,6 +40,7 @@ public class DoorScript : MonoBehaviour
                         DoorScript doorScript = hit.collider.GetComponent<DoorScript>();
 
                         doorScript.isDoorClosed = !doorScript.isDoorClosed;
+                        print("Testing");
                         OnDoorStateChanged?.Invoke(doorScript.isDoorClosed);
                     }
                 }
@@ -53,12 +50,8 @@ public class DoorScript : MonoBehaviour
 
     void ChangeDoorPositionAndRotationBasedOnState()
     {
-        Vector3 targetPosition = isDoorClosed ? doorClosedPosition : doorOpenedPosition;
         Quaternion targetRotation = isDoorClosed ? doorClosedRotation : doorOpenedRotation;
 
-        transform.SetLocalPositionAndRotation(
-            Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * 7f), //Position
-            Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * 7f) //Rotation
-        );
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * 7f);
     }
 }
