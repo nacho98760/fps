@@ -5,23 +5,30 @@ public class DoorListener : MonoBehaviour
     [SerializeField] private DoorScript doorScript;
     [SerializeField] private GameObject labelColorObj;
 
+    [SerializeField] private Material labelColorWhenClosed;
+    [SerializeField] private Material labelColorWhenOpened;
+
+    private PlayerMovement playerScript;
+
     private void Awake()
     {
         doorScript.OnDoorStateChanged += HandleDoorChanged;
+        playerScript = FindFirstObjectByType<PlayerMovement>();
     }
 
 
     private void HandleDoorChanged(bool isDoorClosed)
     {
-        if (isDoorClosed)
+        if (transform.root.name == playerScript.playerCurrentRoom)
         {
-            labelColorObj.transform.GetComponent<Renderer>().material.color = Color.red;
-            labelColorObj.transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red * 1.5f);
-        }
-        else
-        {
-            labelColorObj.transform.GetComponent<Renderer>().material.color = Color.green;
-            labelColorObj.transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green * 1.5f);
+            if (isDoorClosed)
+            {
+                labelColorObj.transform.GetComponent<Renderer>().material = labelColorWhenClosed;
+            }
+            else
+            {
+                labelColorObj.transform.GetComponent<Renderer>().material = labelColorWhenOpened;
+            }
         }
     }
 }

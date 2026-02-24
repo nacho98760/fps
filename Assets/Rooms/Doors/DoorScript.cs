@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DoorScript : MonoBehaviour
 {
@@ -14,44 +16,34 @@ public class DoorScript : MonoBehaviour
     {
         isDoorClosed = true;
         doorClosedRotation = transform.localRotation;
-
-        doorOpenedRotation = doorClosedRotation * Quaternion.Euler(0f, 90f, 0f);
+        doorOpenedRotation = doorClosedRotation * Quaternion.Euler(0f, -90f, 0f);
     }
 
-    void Update()
+    public IEnumerator OpenDoor()
     {
-        CheckForInteractableObjects();
-        ChangeDoorPositionAndRotationBasedOnState();
-    }
+        isDoorClosed = false;
+        OnDoorStateChanged?.Invoke(isDoorClosed);
 
-    void CheckForInteractableObjects()
-    {
-        if (Input.GetMouseButtonDown(0))
+        while (Quaternion.Angle(transform.localRotation, doorOpenedRotation) > 0.1f)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            LayerMask layer = ~LayerMask.GetMask("Ignore Raycast"); //Putting the "~" symbol at the start of the function makes the raycast hit everything except the 'IgnoreRaycast' mask
-
-            if (Physics.Raycast(ray, out RaycastHit hit, 20f, layer))
-            {
-                if (hit.collider.CompareTag("Interactables"))
-                {
-                    if (hit.collider.GetComponent<DoorScript>())
-                    {
-                        DoorScript doorScript = hit.collider.GetComponent<DoorScript>();
-
-                        doorScript.isDoorClosed = !doorScript.isDoorClosed;
-                        print("Testing");
-                        OnDoorStateChanged?.Invoke(doorScript.isDoorClosed);
-                    }
-                }
-            }
+            transform.localRotation = Quaternion.Slerp(transform.localRotation,doorOpenedRotation,Time.deltaTime * 7f);
+            yield return null; 
         }
+
+        transform.localRotation = doorOpenedRotation; 
     }
 
-    void ChangeDoorPositionAndRotationBasedOnState()
+    public IEnumerator CloseDoor()
     {
-        Quaternion targetRotation = isDoorClosed ? doorClosedRotation : doorOpenedRotation;
+        isDoorClosed = true;
+        OnDoorStateChanged?.Invoke(isDoorClosed);
 
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * 7f);
+        while (Quaternion.Angle(transform.localRotation, doorClosedRotation) > 0.1f)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, doorClosedRotation, Time.deltaTime * 7f);
+            yield return null;
+        }
+
+        transform.localRotation = doorClosedRotation;
     }
 }
