@@ -19,7 +19,7 @@ public class DoorListener : MonoBehaviour
 
     private void HandleDoorChanged(bool isDoorClosed)
     {
-        if (transform.root.name == playerScript.playerCurrentRoom)
+        if (transform.root.name == playerScript.playerCurrentRoom) //Check first if the door is in the same player as the door that we are about to open
         {
             if (isDoorClosed)
             {
