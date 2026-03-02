@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,14 @@ public class DoorScript : MonoBehaviour
     Quaternion doorClosedRotation;
     Quaternion doorOpenedRotation;
 
+    [SerializeField] private NarrativeManager narrativeManager;
+
     public bool isDoorClosed;
+
+    private void Awake()
+    {
+        narrativeManager.OnNarrativeEventTriggered += HandleNarrativeEvent;
+    }
 
     void Start()
     {
@@ -45,5 +53,23 @@ public class DoorScript : MonoBehaviour
         }
 
         transform.localRotation = doorClosedRotation;
+    }
+
+    private void HandleNarrativeEvent(string eventName)
+    {
+        if (eventName == "Player Spawn Event")
+        {
+            if (transform.name == "Door1")
+            {
+                StartCoroutine(OpenDoor());
+            }
+        }
+        else if (eventName == "Player Enters First Test Room")
+        { 
+            if (transform.name == "Door1")
+            {
+                StartCoroutine(CloseDoor());
+            }
+        }
     }
 }

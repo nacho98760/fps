@@ -3,10 +3,9 @@ using UnityEngine;
 public class ColorButtonScript : MonoBehaviour
 {
     private Camera playerCamera;
-    Renderer objRenderer;
+    private Renderer objRenderer;
     [SerializeField] private AudioSource colorButtonSound;
-
-    bool isPlayerAllowedToPlay = false;
+    [SerializeField] private ColorPatternTestScript colorPatternTestScript;
 
     private void Awake()
     {
@@ -15,41 +14,47 @@ public class ColorButtonScript : MonoBehaviour
         objRenderer.material.DisableKeyword("_EMISSION");
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        colorPatternTestScript.isPlayerAllowedToPlay = false;
+    }
+
     void Update()
     {
-    
-    }
+        if (!colorPatternTestScript.isPlayerAllowedToPlay)
+            return;
 
-    void Activate()
-    {
-        objRenderer.material.EnableKeyword("_EMISSION");
-        colorButtonSound.Play();
-    }
-    void Deactivate()
-    {
-        objRenderer.material.DisableKeyword("_EMISSION");
-    }
-
-
-    void PlayGuessingGame()
-    {
-        if (Input.GetMouseButtonDown(0) && isPlayerAllowedToPlay)
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             LayerMask layer = ~LayerMask.GetMask("Ignore Raycast");
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 20f, layer))
+            if (Physics.Raycast(ray, out RaycastHit hit, 10f, layer))
             {
-                if (hit.collider.gameObject == gameObject)
-                {
-                    if (objRenderer.material.IsKeywordEnabled("_EMISSION")) //If emission is enabled, do nothing
-                        return;
+                if (hit.collider.gameObject != gameObject)
+                    return;
 
-                    Activate();
-                }
+                if (IsEmissionActive()) //If emission is enabled, do nothing
+                    return;
+
+                Activate();
             }
 
         }
+    }
+
+    public void Activate()
+    {
+        objRenderer.material.EnableKeyword("_EMISSION");
+        colorButtonSound.Play();
+    }
+    public void Deactivate()
+    {
+        objRenderer.material.DisableKeyword("_EMISSION");
+    }
+
+    public bool IsEmissionActive()
+    {
+        return objRenderer.material.IsKeywordEnabled("_EMISSION");
     }
 }

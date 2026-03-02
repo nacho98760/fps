@@ -400,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5542a6bf1da41f48abc9de36103def8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorScript
+  narrativeManager: {fileID: 1139109525}
   isDoorClosed: 0
 --- !u!65 &273211497
 BoxCollider:
@@ -2140,8 +2141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   text: {fileID: 773499411}
-  firstDoor: {fileID: 3469287836645806575}
-  secondDoor: {fileID: 273211496}
 --- !u!114 &773499411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2735,6 +2734,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1139109524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1139109526}
+  - component: {fileID: 1139109525}
+  m_Layer: 5
+  m_Name: NarrativeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1139109525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139109524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d806c0ed1dff07d458f348b3e123f9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NarrativeManagerScript
+  events:
+  - eventName: Player Spawn Event
+    narratorLine: Hello! Whenever you feel ready, please proceed to the first test
+      room.
+    narratorClip: {fileID: 0}
+    delayBefore: 2
+    delayAfter: 1
+  - eventName: Player Enters First Test Room
+    narratorLine: In this first test, you will be shown a random sequence of buttons
+      light up one by one, and you will then need to memorize it and recreate itafter
+      its finished. Get ready.
+    narratorClip: {fileID: 0}
+    delayBefore: 1
+    delayAfter: 1
+  narratorText: {fileID: 773499411}
+  narratorVoice: {fileID: 1261379627}
+--- !u!224 &1139109526
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139109524}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1261379628}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 642, y: 309}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1164124239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +3040,139 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180414309}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1261379626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1261379628}
+  - component: {fileID: 1261379627}
+  m_Layer: 5
+  m_Name: NarratorVoice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1261379627
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261379626}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!224 &1261379628
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261379626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1139109526}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1261799441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,7 +3944,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c33ed389a529c714e8856f10ebe83bcd, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5218,7 +5415,7 @@ GameObject:
   - component: {fileID: 3469287836645806575}
   - component: {fileID: 3469287836645806574}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door1
   m_TagString: Interactables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5473,18 +5670,19 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b148c398467394cb9e69cccf7707df, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  modelBase: {fileID: 4931858289105141743}
+  m_EditorClassIdentifier: Assembly-CSharp::ColorPatternTestScript
   buttons:
-  - {fileID: 8317903755324784331}
-  - {fileID: 7599166936801579143}
-  - {fileID: 873870955417870226}
-  - {fileID: 1376891610004174644}
-  - {fileID: 8736613342792015644}
-  - {fileID: 7504292354141484019}
-  - {fileID: 7919582329916395632}
-  - {fileID: 361873179200791425}
-  - {fileID: 1981172790650012039}
+  - {fileID: 8317903755324784332}
+  - {fileID: 8215556492879511587}
+  - {fileID: 9106798404603840516}
+  - {fileID: 2164352631123472322}
+  - {fileID: 8736613342792015645}
+  - {fileID: 8884070984304366067}
+  - {fileID: 7919582329916395633}
+  - {fileID: 7749482598787279706}
+  - {fileID: 6554047920138762740}
+  narrativeManager: {fileID: 1139109525}
+  isPlayerAllowedToPlay: 0
 --- !u!23 &2164352631123472321
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5547,6 +5745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &2164352631123472323
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5726,6 +5925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5542a6bf1da41f48abc9de36103def8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorScript
+  narrativeManager: {fileID: 1139109525}
   isDoorClosed: 0
 --- !u!33 &3469287838468557221
 MeshFilter:
@@ -6008,6 +6208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &6554047920138762741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6277,6 +6478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &7749482598787279707
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6331,6 +6533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &7919582329916395634
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6380,6 +6583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &8215556492879511588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6434,6 +6638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &8317903755324784333
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6537,6 +6742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &8736613342792015646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6620,6 +6826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &8884070984304366068
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6677,6 +6884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1503069044}
+  colorPatternTestScript: {fileID: 2032109100779835059}
 --- !u!65 &9106798404603840517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6730,6 +6938,7 @@ SceneRoots:
   - {fileID: 1938884488}
   - {fileID: 374516898}
   - {fileID: 377392775}
+  - {fileID: 1139109526}
   - {fileID: 1380830023}
   - {fileID: 1070697946}
   - {fileID: 745471703}
