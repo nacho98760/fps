@@ -7,17 +7,16 @@ using UnityEngine.UIElements;
 
 public class NarrativeManager : MonoBehaviour
 {
+    public event Action<string> OnNarrativeEventTriggered;
+
     private PlayerMovement playerScript;
     private bool wasEventTriggered;
-    private DoorScript doorScript;
 
     [SerializeField] private List<NarrativeEvent> events;
     private Dictionary<string, NarrativeEvent> eventMap;
 
-    [SerializeField] private TMP_Text narratorText;
+    [SerializeField] SetNarratorText narratorTextScript;
     [SerializeField] private AudioSource narratorVoice;
-
-    public event Action<string> OnNarrativeEventTriggered;
 
     private void Awake()
     {
@@ -56,7 +55,9 @@ public class NarrativeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(narrativeEvent.delayBefore);
         OnNarrativeEventTriggered?.Invoke(narrativeEvent.eventName);
-        narratorText.SetText(narrativeEvent.narratorLine);
+
+        StartCoroutine(narratorTextScript.SetTextDialogue(narrativeEvent.narratorLine, 50f)); //-----
+
         //narratorVoice.PlayOneShot(narrativeEvent.narratorClip);
         yield return new WaitForSeconds(narrativeEvent.delayAfter);
     }

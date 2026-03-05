@@ -1,45 +1,49 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class ColorButtonScript : MonoBehaviour
 {
-    private Camera playerCamera;
     private Renderer objRenderer;
     [SerializeField] private AudioSource colorButtonSound;
-    [SerializeField] private ColorPatternTestScript colorPatternTestScript;
+    [SerializeField] private ColorPatternTestScript colorPatternScript;
+
+    private bool isButtonOnCooldown = false;
 
     private void Awake()
     {
-        playerCamera = Camera.main;
         objRenderer = GetComponent<Renderer>();
         objRenderer.material.DisableKeyword("_EMISSION");
     }
 
-    private void Start()
+    private void OnMouseDown()
     {
-        colorPatternTestScript.isPlayerAllowedToPlay = false;
+        if (colorPatternScript.isPlayerAllowedToPlay)
+        {
+            CheckPlayersInputOnMinigame();
+        }
     }
 
-    void Update()
+    private void CheckPlayersInputOnMinigame()
     {
-        if (!colorPatternTestScript.isPlayerAllowedToPlay)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
+        if (colorPatternScript.numberOfPressedButtons < colorPatternScript.buttonCountForMinigame && !isButtonOnCooldown)
         {
-            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-            LayerMask layer = ~LayerMask.GetMask("Ignore Raycast");
+            StartCoroutine(ButtonCooldown());
+            colorPatternScript.numberOfPressedButtons++;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 10f, layer))
+            StartCoroutine(FullButtonPressed());
+
+            ColorButtonScript rightSequenceButton = colorPatternScript.buttonsPickedForMinigame[colorPatternScript.numberOfPressedButtons - 1];
+
+            if (gameObject.name != rightSequenceButton.gameObject.name)
             {
-                if (hit.collider.gameObject != gameObject)
-                    return;
-
-                if (IsEmissionActive()) //If emission is enabled, do nothing
-                    return;
-
-                Activate();
+                colorPatternScript.isSequenceRight = false;
             }
 
+            if (colorPatternScript.numberOfPressedButtons == colorPatternScript.buttonCountForMinigame)
+            {
+                colorPatternScript.ReportEndOfMinigame(colorPatternScript.isSequenceRight);
+            }
         }
     }
 
@@ -53,8 +57,22 @@ public class ColorButtonScript : MonoBehaviour
         objRenderer.material.DisableKeyword("_EMISSION");
     }
 
+    private IEnumerator FullButtonPressed()
+    {
+        Activate();
+        yield return new WaitForSeconds(0.5f);
+        Deactivate();
+    }
+
     public bool IsEmissionActive()
     {
         return objRenderer.material.IsKeywordEnabled("_EMISSION");
+    }
+
+    private IEnumerator ButtonCooldown()
+    {
+        isButtonOnCooldown = true;
+        yield return new WaitForSeconds(0.5f);
+        isButtonOnCooldown = false;
     }
 }

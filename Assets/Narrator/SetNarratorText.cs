@@ -4,15 +4,20 @@ using System.Collections;
 
 public class SetNarratorText : MonoBehaviour
 {
-    [SerializeField] private TMP_Text text;
-
     private void Awake()
     {
-        SetText("");
+        StartCoroutine(SetTextDialogue("", 50f));
     }
 
-    private void SetText(string textToDisplay)
+    public IEnumerator SetTextDialogue(string textToDisplay, float typyingSpeed)
     {
-        text.text = textToDisplay;
+        TMP_Text narratorText = GetComponent<TMP_Text>();
+        narratorText.text = "";
+
+        foreach (char letter in textToDisplay)
+        {
+            narratorText.text += letter;
+            yield return new WaitForSeconds(1f / typyingSpeed);
+        }
     }
 }

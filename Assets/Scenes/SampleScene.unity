@@ -2777,7 +2777,7 @@ MonoBehaviour:
     narratorClip: {fileID: 0}
     delayBefore: 1
     delayAfter: 1
-  narratorText: {fileID: 773499411}
+  narratorTextScript: {fileID: 773499410}
   narratorVoice: {fileID: 1261379627}
 --- !u!224 &1139109526
 RectTransform:
@@ -5795,7 +5795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &1690442677708289467
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6266,7 +6266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &5622451830485097141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6329,7 +6329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &5774489412835708682
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6413,7 +6413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &6069447976758223365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6604,7 +6604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &6903846761651227934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6767,7 +6767,7 @@ MonoBehaviour:
   - {fileID: 8798019974929247319}
   - {fileID: 8975174196248680649}
   narrativeManager: {fileID: 1139109525}
-  isPlayerAllowedToPlay: 0
+  buttonsPickedForMinigame: []
 --- !u!1 &7779086629127383486
 GameObject:
   m_ObjectHideFlags: 0
@@ -6801,7 +6801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &7779086629127383488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6908,7 +6908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &8305772508411141293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7015,7 +7015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &8798019974929247320
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7066,7 +7066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorButtonScript
   colorButtonSound: {fileID: 1293170538}
-  colorPatternTestScript: {fileID: 7680344885303089421}
+  colorPatternScript: {fileID: 7680344885303089421}
 --- !u!65 &8975174196248680650
 BoxCollider:
   m_ObjectHideFlags: 0
