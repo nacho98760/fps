@@ -10,13 +10,17 @@ public class NarrativeManager : MonoBehaviour
     public event Action<string> OnNarrativeEventTriggered;
 
     private PlayerMovement playerScript;
-    private bool wasEventTriggered;
+    private bool wasFirstVariantOfFirstTestTriggered;
+    private bool wasSecondVariantOfFirstTestTriggered;
 
     [SerializeField] private List<NarrativeEvent> events;
     private Dictionary<string, NarrativeEvent> eventMap;
 
     [SerializeField] SetNarratorText narratorTextScript;
     [SerializeField] private AudioSource narratorVoice;
+
+    // -----Test rooms scripts-----
+    [SerializeField] private ColorPatternTestScript colorPatternTestScript;
 
     private void Awake()
     {
@@ -36,10 +40,16 @@ public class NarrativeManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerScript.playerCurrentRoom == "Room2" && wasEventTriggered == false)
+        if (playerScript.playerCurrentRoom == "Room2" && !wasFirstVariantOfFirstTestTriggered)
         {
-            wasEventTriggered = true;
-            TriggerEvent("Player Enters First Test Room");
+            wasFirstVariantOfFirstTestTriggered = true;
+            TriggerEvent("First variant of ColorPatternTest");
+        }
+
+        if (colorPatternTestScript.didFirstMinigameVariantFinished && !wasSecondVariantOfFirstTestTriggered)
+        {
+            wasSecondVariantOfFirstTestTriggered = true;
+            TriggerEvent("Second variant of ColorPatternTest");
         }
     }
 
@@ -56,7 +66,7 @@ public class NarrativeManager : MonoBehaviour
         yield return new WaitForSeconds(narrativeEvent.delayBefore);
         OnNarrativeEventTriggered?.Invoke(narrativeEvent.eventName);
 
-        StartCoroutine(narratorTextScript.SetTextDialogue(narrativeEvent.narratorLine, 50f)); //-----
+        StartCoroutine(narratorTextScript.SetTextDialogue(narrativeEvent.narratorLine, wpm:50f)); 
 
         //narratorVoice.PlayOneShot(narrativeEvent.narratorClip);
         yield return new WaitForSeconds(narrativeEvent.delayAfter);

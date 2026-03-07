@@ -14,12 +14,17 @@ public class ColorPatternTestScript : MonoBehaviour
     [NonSerialized] public int numberOfPressedButtons;
     [NonSerialized] public bool isSequenceRight;
 
+    [NonSerialized] public bool didFirstMinigameVariantFinished = false;
+
     [NonSerialized] public bool isPlayerAllowedToPlay;
+
+    public int minigameVariant = 1;
 
     private void Awake()
     {
         narrativeManager.OnNarrativeEventTriggered += HandleNarrativeEvent;
     }
+
     private void Start()
     {
         numberOfPressedButtons = 0;
@@ -29,23 +34,42 @@ public class ColorPatternTestScript : MonoBehaviour
 
     private void HandleNarrativeEvent(string eventName)
     {
-        if (eventName == "Player Enters First Test Room")
+        if (eventName == "First variant of ColorPatternTest")
         {
-            StartCoroutine(PlayFirstMinigame());
+            minigameVariant = 1;
+            StartCoroutine(PlayMinigame(minigameVariant));
+        }
+
+        if (eventName == "Second variant of ColorPatternTest")
+        {
+            minigameVariant = 2;
+            StartCoroutine(PlayMinigame(minigameVariant));
         }
     }
 
     public void ReportEndOfMinigame(bool isButtonSequenceRight)
     {
-        print(isButtonSequenceRight);
+        didFirstMinigameVariantFinished = true;
+        numberOfPressedButtons = 0;
+        isPlayerAllowedToPlay = false;
+
+        if (isButtonSequenceRight)
+        {
+            print("You got it right! Well done.");
+        }
+        else
+        {
+            print("Not quite the right sequence, but don't worry, we are not measuring results, only the way you answer.");
+        }
     }
 
 
-    private IEnumerator PlayFirstMinigame()
+    private IEnumerator PlayMinigame(int variant)
     {
+        buttonsPickedForMinigame = null;
         buttonsPickedForMinigame = new ColorButtonScript[buttonCountForMinigame];
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
 
         for (int i = 0; i < buttonCountForMinigame; i++)
         {
@@ -56,6 +80,11 @@ public class ColorPatternTestScript : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             randomButton.Deactivate();
             yield return new WaitForSeconds(0.85f);
+        }
+
+        if (variant == 2)
+        {
+            Array.Reverse(buttonsPickedForMinigame);
         }
 
         isPlayerAllowedToPlay = true;

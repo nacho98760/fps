@@ -14,10 +14,12 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private NarrativeManager narrativeManager;
 
     public bool isDoorClosed;
+    private AudioSource doorSound;
 
     private void Awake()
     {
         narrativeManager.OnNarrativeEventTriggered += HandleNarrativeEvent;
+        doorSound = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -44,6 +46,7 @@ public class DoorScript : MonoBehaviour
     public IEnumerator CloseDoor()
     {
         isDoorClosed = true;
+        doorSound.Play();
         OnDoorStateChanged?.Invoke(isDoorClosed);
 
         while (Quaternion.Angle(transform.localRotation, doorClosedRotation) > 0.1f)
@@ -57,16 +60,13 @@ public class DoorScript : MonoBehaviour
 
     private void HandleNarrativeEvent(string eventName)
     {
-        if (eventName == "Player Spawn Event")
+        if (transform.name == "Door1")
         {
-            if (transform.name == "Door1")
+            if (eventName == "Player Spawn Event")
             {
                 StartCoroutine(OpenDoor());
             }
-        }
-        else if (eventName == "Player Enters First Test Room")
-        { 
-            if (transform.name == "Door1")
+            else if (eventName == "First variant of ColorPatternTest")
             {
                 StartCoroutine(CloseDoor());
             }
