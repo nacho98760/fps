@@ -2849,24 +2849,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NarrativeManagerScript
   events:
   - eventName: Player Spawn Event
-    narratorLine: Hello! Whenever you feel ready, please proceed to the first test
-      room.
+    dialogues:
+    - Hello! Whenever you feel ready, please proceed to the first test room.
     narratorClip: {fileID: 0}
     delayBefore: 2
-    delayAfter: 1
+    delayAfter: 0.1
   - eventName: First variant of ColorPatternTest
-    narratorLine: In this first test, you will be shown a random sequence of buttons
-      light up one by one, and you will then need to memorize it and recreate it
-      after its finished. Get ready.
+    dialogues:
+    - In this first test, you will be shown a random sequence of buttons light up
+      one by one, and you will then need to memorize it and recreate it after its
+      finished. Get ready.
     narratorClip: {fileID: 0}
     delayBefore: 1
     delayAfter: 1
   - eventName: Second variant of ColorPatternTest
-    narratorLine: Now, we will test reverse pattern recognition. Basically, you will
-      need to introduce the sequence given but in reversed order. Get ready.
+    dialogues:
+    - Now, we will test reverse pattern recognition. Basically, you will need to
+      introduce the sequence given but in reversed order. Get ready.
     narratorClip: {fileID: 0}
     delayBefore: 1
     delayAfter: 1
+  - eventName: Minigame Success
+    dialogues:
+    - You got it right! Well done.
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
+  - eventName: Minigame Failure
+    dialogues:
+    - Not quite the right sequence, but don't worry, we are not measuring results,
+      only the way you answer.
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
   narratorTextScript: {fileID: 1380830024}
   narratorVoice: {fileID: 1261379627}
   colorPatternTestScript: {fileID: 8854637723345381251}
@@ -4021,6 +4036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af60aef25666b734e80ff0244992db3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetNarratorText
+  narrativeManager: {fileID: 1139109525}
   textPanel: {fileID: 1663202928}
   narratorText: {fileID: 773499411}
 --- !u!1 &1441552254

@@ -1,43 +1,90 @@
-using UnityEngine;
-using TMPro;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class SetNarratorText : MonoBehaviour
 {
+    [SerializeField] private NarrativeManager narrativeManager;
     [SerializeField] private GameObject textPanel;
     [SerializeField] private TMP_Text narratorText;
 
-    private int activeDialogues = 0;
+    [NonSerialized] public Queue<string> dialogueQueue = new Queue<string>();
+    [NonSerialized] public bool isDialoguePlaying = false;
 
     private void Awake()
     {
-        StartCoroutine(SetTextDialogue("", wpm:50f));
+        narrativeManager.OnNarrativeEventTriggered += HandleNarrativeEvent;
     }
 
     private void Start()
     {
-        print("Helo");
+        narratorText.text = "";
         textPanel.SetActive(false);
     }
 
-    public IEnumerator SetTextDialogue(string textToDisplay, float wpm) //wpm short for "Words per min"
+    public void QueueDialogue(string text, float timeToRead)
     {
-        activeDialogues++;
+        dialogueQueue.Enqueue(text);
 
-        textPanel.SetActive(true);
-        narratorText.text = "";
+        if (!isDialoguePlaying)
+            StartCoroutine(PlayNextDialogue(timeToRead, wpm: 50f));
+    }
 
-        foreach (char letter in textToDisplay)
+    private IEnumerator PlayNextDialogue(float timeToRead, float wpm)
+    {
+        isDialoguePlaying = true;
+
+        while (dialogueQueue.Count > 0)
         {
-            narratorText.text += letter;
-            yield return new WaitForSeconds(1f / wpm);
+            string text = dialogueQueue.Dequeue();
+
+            textPanel.SetActive(true);
+            narratorText.text = "";
+
+            foreach (char letter in text)
+            {
+                narratorText.text += letter;
+                yield return new WaitForSeconds(1f / wpm);
+            }
+
+            yield return new WaitForSeconds(timeToRead);
         }
 
-        yield return new WaitForSeconds(5f);
+        isDialoguePlaying = false;
+        textPanel.SetActive(false);
+    }
 
-        activeDialogues--;
 
-        if (activeDialogues == 0) //If more than 0, it means that the function was called again, meaning another text popped up. So we only close the text UI if its 0 (aka, no more text showed)
-            textPanel.SetActive(false);
+    public IEnumerator WaitForDialogueToFinish()
+    {
+        yield return new WaitUntil(() => !isDialoguePlaying && dialogueQueue.Count == 0);
+    }
+
+    private void HandleNarrativeEvent(string eventName, List<string> dialogues)
+    {
+        switch (eventName)
+        {
+            case "Player Spawn Event":
+                QueueDialogue(dialogues[0], 2f);
+                break;
+
+            case "First variant of ColorPatternTest":
+                QueueDialogue(dialogues[0], 7f);
+                break;
+
+            case "Second variant of ColorPatternTest":
+                QueueDialogue(dialogues[0], 6f);
+                break;
+
+            case "Minigame Success":
+                QueueDialogue(dialogues[0], 2f);
+                break;
+
+            case "Minigame Failure":
+                QueueDialogue(dialogues[0], 2f);
+                break;
+        }
     }
 }

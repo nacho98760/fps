@@ -37,11 +37,13 @@ public class ColorButtonScript : MonoBehaviour
 
             if (gameObject.name != rightSequenceButton.gameObject.name)
             {
+                print("Yesd");
                 colorPatternScript.isSequenceRight = false;
             }
 
             if (colorPatternScript.numberOfPressedButtons == colorPatternScript.buttonCountForMinigame)
             {
+                print(colorPatternScript.isSequenceRight);
                 colorPatternScript.ReportEndOfMinigame(colorPatternScript.isSequenceRight);
             }
         }

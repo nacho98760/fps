@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +17,7 @@ public class ColorPatternTestScript : MonoBehaviour
     [NonSerialized] public bool isSequenceRight;
 
     [NonSerialized] public bool didFirstMinigameVariantFinished = false;
+    [NonSerialized] public bool didSecondMinigameVariantFinished = false;
 
     [NonSerialized] public bool isPlayerAllowedToPlay;
 
@@ -32,7 +35,7 @@ public class ColorPatternTestScript : MonoBehaviour
         isPlayerAllowedToPlay = false;
     }
 
-    private void HandleNarrativeEvent(string eventName)
+    private void HandleNarrativeEvent(string eventName, List<string> dialogues)
     {
         if (eventName == "First variant of ColorPatternTest")
         {
@@ -49,23 +52,24 @@ public class ColorPatternTestScript : MonoBehaviour
 
     public void ReportEndOfMinigame(bool isButtonSequenceRight)
     {
-        didFirstMinigameVariantFinished = true;
+        if (minigameVariant == 1)
+        {
+            didFirstMinigameVariantFinished = true;
+            didSecondMinigameVariantFinished = false;
+        }
+        else if (minigameVariant == 2)
+        {
+            didSecondMinigameVariantFinished = true;
+        }
+
         numberOfPressedButtons = 0;
         isPlayerAllowedToPlay = false;
-
-        if (isButtonSequenceRight)
-        {
-            print("You got it right! Well done.");
-        }
-        else
-        {
-            print("Not quite the right sequence, but don't worry, we are not measuring results, only the way you answer.");
-        }
     }
 
 
     private IEnumerator PlayMinigame(int variant)
     {
+        isSequenceRight = true;
         buttonsPickedForMinigame = null;
         buttonsPickedForMinigame = new ColorButtonScript[buttonCountForMinigame];
         

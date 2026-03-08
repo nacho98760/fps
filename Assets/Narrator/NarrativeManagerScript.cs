@@ -3,82 +3,95 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UIElements;
 
 public class NarrativeManager : MonoBehaviour
 {
-    public event Action<string> OnNarrativeEventTriggered;
-
-    private PlayerMovement playerScript;
-    private bool wasFirstVariantOfFirstTestTriggered;
-    private bool wasSecondVariantOfFirstTestTriggered;
+    public event Action<string, List<string>> OnNarrativeEventTriggered;
 
     [SerializeField] private List<NarrativeEvent> events;
-    private Dictionary<string, NarrativeEvent> eventMap;
-
-    [SerializeField] SetNarratorText narratorTextScript;
+    [SerializeField] private SetNarratorText narratorTextScript;
     [SerializeField] private AudioSource narratorVoice;
-
-    // -----Test rooms scripts-----
     [SerializeField] private ColorPatternTestScript colorPatternTestScript;
+
+    private PlayerMovement playerScript;
+    private Dictionary<string, NarrativeEvent> eventMap;
 
     private void Awake()
     {
         playerScript = FindFirstObjectByType<PlayerMovement>();
 
-        eventMap = new Dictionary<string, NarrativeEvent>(); //Ev is short for "Event"
+        eventMap = new Dictionary<string, NarrativeEvent>();
         foreach (NarrativeEvent ev in events)
-        {
             eventMap[ev.eventName] = ev;
-        }
     }
 
     private void Start()
     {
-        TriggerEvent("Player Spawn Event");
+        StartCoroutine(GameSequence());
     }
 
-    private void Update()
+    private IEnumerator GameSequence()
     {
-        if (playerScript.playerCurrentRoom == "Room2" && !wasFirstVariantOfFirstTestTriggered)
-        {
-            wasFirstVariantOfFirstTestTriggered = true;
-            TriggerEvent("First variant of ColorPatternTest");
-        }
+        // Player spawns
+        yield return StartCoroutine(TriggerEventAndWait("Player Spawn Event"));
 
-        if (colorPatternTestScript.didFirstMinigameVariantFinished && !wasSecondVariantOfFirstTestTriggered)
-        {
-            wasSecondVariantOfFirstTestTriggered = true;
-            TriggerEvent("Second variant of ColorPatternTest");
-        }
+        // Wait for player to enter Room2
+        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room2");
+
+        // First minigame variant
+        yield return StartCoroutine(TriggerEventAndWait("First variant of ColorPatternTest"));
+
+        // Wait for first minigame to finish
+        yield return new WaitUntil(() => colorPatternTestScript.didFirstMinigameVariantFinished);
+
+        // Show result dialogue and wait for it to finish
+        string firstResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
+        yield return StartCoroutine(TriggerEventAndWait(firstResultEvent));
+
+        // Second minigame variant
+        yield return StartCoroutine(TriggerEventAndWait("Second variant of ColorPatternTest"));
+
+        // Wait for second minigame to finish
+        yield return new WaitUntil(() => colorPatternTestScript.didSecondMinigameVariantFinished);
+
+        // Show result dialogue and wait for it to finish
+        string secondResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
+        yield return StartCoroutine(TriggerEventAndWait(secondResultEvent));
+
+        // Continue with next events...
     }
 
+
+    private IEnumerator TriggerEventAndWait(string eventName)
+    {
+        if (!eventMap.TryGetValue(eventName, out NarrativeEvent ev)) 
+            yield break;
+
+        yield return new WaitForSeconds(ev.delayBefore);
+
+        OnNarrativeEventTriggered?.Invoke(ev.eventName, ev.dialogues);
+        yield return StartCoroutine(narratorTextScript.WaitForDialogueToFinish());
+
+        yield return new WaitForSeconds(ev.delayAfter);
+    }
+
+
+
+    // Still available for one-off triggers that don't need to be awaited
     public void TriggerEvent(string eventName)
     {
         if (eventMap.TryGetValue(eventName, out NarrativeEvent ev))
-        {
-            StartCoroutine(PlayEvent(ev));
-        }
-    }
-
-    private IEnumerator PlayEvent(NarrativeEvent narrativeEvent)
-    {
-        yield return new WaitForSeconds(narrativeEvent.delayBefore);
-        OnNarrativeEventTriggered?.Invoke(narrativeEvent.eventName);
-
-        StartCoroutine(narratorTextScript.SetTextDialogue(narrativeEvent.narratorLine, wpm:50f)); 
-
-        //narratorVoice.PlayOneShot(narrativeEvent.narratorClip);
-        yield return new WaitForSeconds(narrativeEvent.delayAfter);
+            StartCoroutine(TriggerEventAndWait(eventName));
     }
 }
+
 
 
 [System.Serializable]
 public class NarrativeEvent
 {
     public string eventName;
-    public string narratorLine;
+    public List<string> dialogues;
     public AudioClip narratorClip;
     public float delayBefore;
     public float delayAfter;

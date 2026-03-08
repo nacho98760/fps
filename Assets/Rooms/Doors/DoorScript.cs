@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -58,7 +60,7 @@ public class DoorScript : MonoBehaviour
         transform.localRotation = doorClosedRotation;
     }
 
-    private void HandleNarrativeEvent(string eventName)
+    private void HandleNarrativeEvent(string eventName, List<string> dialogues)
     {
         if (transform.name == "Door1")
         {
