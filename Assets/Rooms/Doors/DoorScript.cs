@@ -73,5 +73,16 @@ public class DoorScript : MonoBehaviour
                 StartCoroutine(CloseDoor());
             }
         }
+        if (transform.name == "Door2")
+        {
+            if (eventName == "End of ColorPatternTest")
+            {
+                StartCoroutine(OpenDoor());
+            }
+            else if (eventName == "Start of ImageAssociationTest")
+            {
+                StartCoroutine(CloseDoor());
+            }
+        }
     }
 }

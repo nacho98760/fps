@@ -10,7 +10,6 @@ public class NarrativeManager : MonoBehaviour
 
     [SerializeField] private List<NarrativeEvent> events;
     [SerializeField] private SetNarratorText narratorTextScript;
-    [SerializeField] private AudioSource narratorVoice;
     [SerializeField] private ColorPatternTestScript colorPatternTestScript;
 
     private PlayerMovement playerScript;
@@ -58,7 +57,11 @@ public class NarrativeManager : MonoBehaviour
         string secondResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
         yield return StartCoroutine(TriggerEventAndWait(secondResultEvent));
 
-        // Continue with next events...
+        yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
+
+        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
+
+        yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
     }
 
 
@@ -70,20 +73,31 @@ public class NarrativeManager : MonoBehaviour
         yield return new WaitForSeconds(ev.delayBefore);
 
         OnNarrativeEventTriggered?.Invoke(ev.eventName, ev.dialogues);
+
+        PlayNarratorVoiceOnAllSpeakers(ev.narratorClip);
+
         yield return StartCoroutine(narratorTextScript.WaitForDialogueToFinish());
 
         yield return new WaitForSeconds(ev.delayAfter);
     }
 
-
-
-    // Still available for one-off triggers that don't need to be awaited
+    // Still available for one-off triggers that dont need to be awaited
     public void TriggerEvent(string eventName)
     {
         if (eventMap.TryGetValue(eventName, out NarrativeEvent ev))
             StartCoroutine(TriggerEventAndWait(eventName));
     }
+
+
+    private void PlayNarratorVoiceOnAllSpeakers(AudioClip dialogueToPlay)
+    {
+        foreach (NarratorVoiceScript narratorVoice in NarratorVoiceScript.narratorVoiceGameObjs)
+        {
+            narratorVoice.audioSource.PlayOneShot(dialogueToPlay);
+        }
+    }
 }
+
 
 
 

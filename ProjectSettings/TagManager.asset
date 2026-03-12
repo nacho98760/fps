@@ -8,6 +8,7 @@ TagManager:
   - SolidObjects
   - Interactables
   - InvisibleTriggers
+  - SpeakerVoice
   layers:
   - Default
   - TransparentFX

@@ -73,7 +73,7 @@ public class ColorPatternTestScript : MonoBehaviour
         buttonsPickedForMinigame = null;
         buttonsPickedForMinigame = new ColorButtonScript[buttonCountForMinigame];
         
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(12f);
 
         for (int i = 0; i < buttonCountForMinigame; i++)
         {

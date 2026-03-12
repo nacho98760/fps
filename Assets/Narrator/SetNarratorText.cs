@@ -85,6 +85,14 @@ public class SetNarratorText : MonoBehaviour
             case "Minigame Failure":
                 QueueDialogue(dialogues[0], 2f);
                 break;
+
+            case "End of ColorPatternTest":
+                QueueDialogue(dialogues[0], 4f);
+                break;
+
+            case "Start of ImageAssociationTest":
+                QueueDialogue(dialogues[0], 8f);
+                break;
         }
     }
 }
