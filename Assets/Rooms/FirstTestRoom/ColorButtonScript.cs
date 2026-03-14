@@ -37,7 +37,7 @@ public class ColorButtonScript : MonoBehaviour
 
             if (gameObject.name != rightSequenceButton.gameObject.name)
             {
-                print("Yesd");
+                //print("Yesd");
                 colorPatternScript.isSequenceRight = false;
             }
 

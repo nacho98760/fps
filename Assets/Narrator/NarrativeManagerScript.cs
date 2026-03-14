@@ -26,7 +26,8 @@ public class NarrativeManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(GameSequence());
+        //StartCoroutine(GameSequence());
+        StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
     }
 
     private IEnumerator GameSequence()

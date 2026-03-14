@@ -169,11 +169,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae67df0a7045704b89f5416db578909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  narrativeManager: {fileID: 1139109525}
+  optionButtonScripts:
+  - {fileID: 1217715501}
+  - {fileID: 609073751}
+  - {fileID: 145453926}
+  - {fileID: 165724098}
   screenRenderer: {fileID: 1501256350}
-  images:
-  - {fileID: 2800000, guid: fe9c14c34aff2ce4b96d7f97037bec07, type: 3}
-  - {fileID: 2800000, guid: 90fbdaffd75f31e48a8bb3c2cd1feeaa, type: 3}
-  - {fileID: 2800000, guid: e115c4d93b1c1a144a139ecb2e09fd52, type: 3}
+  defaultScreenMaterial: {fileID: 2100000, guid: 84df7176b62e68e4e8e70b0bb5c9cb7e, type: 2}
+  imageMaterials:
+  - {fileID: 2100000, guid: 017a3cf950d70924c871bbb9018d1e47, type: 2}
+  - {fileID: 2100000, guid: cc8ff4102b8c0e2449f8e5e4f9a05805, type: 2}
+  - {fileID: 2100000, guid: ff115c1e7d32ad949a0c7c67e25f228c, type: 2}
+  imageOptionButtonMaterial: {fileID: 2100000, guid: 86962a5d016bdb04abbc2b8f8bb4d826, type: 2}
 --- !u!1 &70571824
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +285,7 @@ GameObject:
   - component: {fileID: 145453925}
   - component: {fileID: 145453924}
   - component: {fileID: 145453923}
+  - component: {fileID: 145453926}
   m_Layer: 0
   m_Name: OptionButton3
   m_TagString: Untagged
@@ -377,6 +386,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145453921}
   m_Mesh: {fileID: -1337566010273431828, guid: 820e7507eca6df4458d6c84fc4b01112, type: 3}
+--- !u!114 &145453926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145453921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5995f35a13b6b364ebc2a0d59f5e51cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageAssociationTestOptionButtonScript
+  imageAssociationTestScript: {fileID: 38486984}
+  textAssociatedWithThisButton: {fileID: 1908754530}
+  imageButtonRendererAssociatedWithThis: {fileID: 1171353591}
 --- !u!1 &161871888
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +594,7 @@ GameObject:
   - component: {fileID: 165724097}
   - component: {fileID: 165724096}
   - component: {fileID: 165724095}
+  - component: {fileID: 165724098}
   m_Layer: 0
   m_Name: OptionButton4
   m_TagString: Untagged
@@ -670,6 +695,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165724093}
   m_Mesh: {fileID: -1337566010273431828, guid: 820e7507eca6df4458d6c84fc4b01112, type: 3}
+--- !u!114 &165724098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165724093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5995f35a13b6b364ebc2a0d59f5e51cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageAssociationTestOptionButtonScript
+  imageAssociationTestScript: {fileID: 38486984}
+  textAssociatedWithThisButton: {fileID: 161871890}
+  imageButtonRendererAssociatedWithThis: {fileID: 1707084460}
 --- !u!1 &166079539
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,6 +2844,7 @@ GameObject:
   - component: {fileID: 609073750}
   - component: {fileID: 609073749}
   - component: {fileID: 609073748}
+  - component: {fileID: 609073751}
   m_Layer: 0
   m_Name: OptionButton2
   m_TagString: Untagged
@@ -2904,6 +2945,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609073746}
   m_Mesh: {fileID: -1337566010273431828, guid: 820e7507eca6df4458d6c84fc4b01112, type: 3}
+--- !u!114 &609073751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609073746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5995f35a13b6b364ebc2a0d59f5e51cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageAssociationTestOptionButtonScript
+  imageAssociationTestScript: {fileID: 38486984}
+  textAssociatedWithThisButton: {fileID: 539074727}
+  imageButtonRendererAssociatedWithThis: {fileID: 507928864}
 --- !u!1 &619835083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4545,9 +4601,9 @@ MonoBehaviour:
     delayAfter: 1
   - eventName: Second variant of ColorPatternTest
     dialogues:
-    - Now, we will test reverse pattern recognition. Basically, you will need to
-      introduce the sequence given but in reversed order. Get ready.
-    narratorClip: {fileID: 0}
+    - 'Now, we will test reverse pattern recognition. Basically, you will need to
+      introduce the sequence given but in reversed order. '
+    narratorClip: {fileID: 8300000, guid: d55eb8af1b3d141489b4cd2393d5f73b, type: 3}
     delayBefore: 1
     delayAfter: 1
   - eventName: Minigame Success
@@ -4570,10 +4626,10 @@ MonoBehaviour:
     narratorClip: {fileID: 0}
     delayBefore: 0.1
     delayAfter: 0.1
-  - eventName: ImageAssociationTest
+  - eventName: Start of ImageAssociationTest
     dialogues:
     - In this second test, you will be shown different scenarios and you will then
-      need to pick the word that better first the image from the options below the
+      need to pick the word that better fits the image from the options below the
       screen.
     narratorClip: {fileID: 0}
     delayBefore: 0.1
@@ -5097,6 +5153,7 @@ GameObject:
   - component: {fileID: 1217715500}
   - component: {fileID: 1217715499}
   - component: {fileID: 1217715498}
+  - component: {fileID: 1217715501}
   m_Layer: 0
   m_Name: OptionButton1
   m_TagString: Untagged
@@ -5197,6 +5254,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217715496}
   m_Mesh: {fileID: -1337566010273431828, guid: 820e7507eca6df4458d6c84fc4b01112, type: 3}
+--- !u!114 &1217715501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217715496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5995f35a13b6b364ebc2a0d59f5e51cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageAssociationTestOptionButtonScript
+  imageAssociationTestScript: {fileID: 38486984}
+  textAssociatedWithThisButton: {fileID: 1353061360}
+  imageButtonRendererAssociatedWithThis: {fileID: 1696542924}
 --- !u!1 &1237076528
 GameObject:
   m_ObjectHideFlags: 0
@@ -6995,7 +7067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84df7176b62e68e4e8e70b0bb5c9cb7e, type: 2}
+  - {fileID: 2100000, guid: cc8ff4102b8c0e2449f8e5e4f9a05805, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9418,7 +9490,7 @@ Transform:
   m_GameObject: {fileID: 2094410410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.29, y: 1.35, z: -0.34}
+  m_LocalPosition: {x: 14.34, y: 1.35, z: -0.34}
   m_LocalScale: {x: 1, y: 1.0545, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
