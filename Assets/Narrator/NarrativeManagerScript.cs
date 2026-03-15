@@ -11,6 +11,7 @@ public class NarrativeManager : MonoBehaviour
     [SerializeField] private List<NarrativeEvent> events;
     [SerializeField] private SetNarratorText narratorTextScript;
     [SerializeField] private ColorPatternTestScript colorPatternTestScript;
+    [SerializeField] private ImageAssociationTestScript imageAssociationTestScript;
 
     private PlayerMovement playerScript;
     private Dictionary<string, NarrativeEvent> eventMap;
@@ -27,7 +28,20 @@ public class NarrativeManager : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(GameSequence());
+        StartCoroutine(GameSequenceUsedForTesting());
+
+
+    }
+
+    private IEnumerator GameSequenceUsedForTesting()
+    {
         StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
+        for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
+        {
+            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
+            print("Executed");
+            yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
+        }
     }
 
     private IEnumerator GameSequence()
@@ -63,6 +77,12 @@ public class NarrativeManager : MonoBehaviour
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
 
         yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
+
+        for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
+        {
+            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
+            yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
+        }
     }
 
 

@@ -10,26 +10,35 @@ public class ImageAssociationTestScript : MonoBehaviour
 
     [SerializeField] private ImageAssociationTestOptionButtonScript[] optionButtonScripts;
 
-    [SerializeField] private Renderer screenRenderer;
+    [SerializeField] private Renderer mainScreenRenderer;
+    [SerializeField] private Renderer secondScreenRenderer;
     [SerializeField] private Material defaultScreenMaterial;
+
+    [NonSerialized] public int numberOfImagesToShow;
     [SerializeField] private Material[] imageMaterials;
 
+    [SerializeField] private Material secondScreenMaterial;
     [SerializeField] private Material imageOptionButtonMaterial;
 
-    [NonSerialized] public bool didPlayerPickAnOption = true;
+    [NonSerialized] public bool didPlayerPickAnOption = false;
     [NonSerialized] public bool isPlayerAbleToPlay = false;
 
     string[] textsForParkImage = { "Park", "Tree", "Calm", "Green" };
     string[] textsForCityImage = { "Lights", "City", "Bridge", "People" };
     string[] textsForRoomImage = { "Cozy", "Wood", "Carpet", "Plant" };
 
+    [NonSerialized] public bool didImageOptionsEnded = false;
+
     private void Awake()
     {
         narrativeManager.OnNarrativeEventTriggered += HandleNarrativeEvent;
+
+        CountNumberOfImagesToShow();
     }
 
     private void Start()
     {
+        didImageOptionsEnded = false;
         TurnOffScreen();
     }
 
@@ -41,34 +50,57 @@ public class ImageAssociationTestScript : MonoBehaviour
         }
     }
 
+    void CountNumberOfImagesToShow()
+    {
+        numberOfImagesToShow = 0;
+        foreach (var image in imageMaterials)
+        {
+            numberOfImagesToShow++;
+        }
+    }
+
 
     private IEnumerator PlayMinigame()
     {
-        yield return new WaitForSeconds(9.5f);
+        yield return new WaitForSeconds(11f);
 
-        foreach (ImageAssociationTestOptionButtonScript optionButton in optionButtonScripts)
-        {
-            optionButton.imageButtonRendererAssociatedWithThis.material = imageOptionButtonMaterial;
-        }
+        TurnOnMinorPartsOfScreen();
+
+        bool isItTheFirstImage = true;
 
         foreach (Material imageMaterial in imageMaterials)
         {
-            yield return new WaitUntil(() => didPlayerPickAnOption);
-            ShowImageAndTextOptions(imageMaterial);
+            if (isItTheFirstImage)
+            {
+                isItTheFirstImage = false;
+                ShowImageAndTextOptions(imageMaterial);
+            }
+            else
+            {
+                yield return new WaitUntil(() => didPlayerPickAnOption);
+                didPlayerPickAnOption = false;
+                yield return new WaitForSeconds(3f);
+                ShowImageAndTextOptions(imageMaterial);
+            }
         }
 
-        if (didPlayerPickAnOption)
-        {
-            TurnOffScreen();
-        }
+        didImageOptionsEnded = true;
     }
 
     void ShowImageAndTextOptions(Material imageMaterialToShow)
     {
-        didPlayerPickAnOption = false;
         isPlayerAbleToPlay = true;
-        screenRenderer.material = imageMaterialToShow;
+        mainScreenRenderer.material = imageMaterialToShow;
         SetTextOptions(imageMaterialToShow);
+    }
+
+    void TurnOnMinorPartsOfScreen()
+    {
+        secondScreenRenderer.material = secondScreenMaterial;
+        foreach (ImageAssociationTestOptionButtonScript optionButton in optionButtonScripts)
+        {
+            optionButton.imageButtonRendererAssociatedWithThis.material = imageOptionButtonMaterial;
+        }
     }
 
     void SetTextOptions(Material imageMaterialToShow)
@@ -106,9 +138,10 @@ public class ImageAssociationTestScript : MonoBehaviour
         return textOptionsChosen;
     }
 
-    private void TurnOffScreen()
+    public void TurnOffScreen()
     {
-        screenRenderer.material = defaultScreenMaterial;
+        mainScreenRenderer.material = defaultScreenMaterial;
+        secondScreenRenderer.material = defaultScreenMaterial;
         foreach (ImageAssociationTestOptionButtonScript optionButton in optionButtonScripts)
         {
             optionButton.textAssociatedWithThisButton.text = "";

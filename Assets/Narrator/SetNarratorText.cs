@@ -93,6 +93,10 @@ public class SetNarratorText : MonoBehaviour
             case "Start of ImageAssociationTest":
                 QueueDialogue(dialogues[0], 8f);
                 break;
+
+            case "In-between association images dialogue":
+                QueueDialogue(dialogues[UnityEngine.Random.Range(0, dialogues.Count)], 1.5f);
+                break;
         }
     }
 }
