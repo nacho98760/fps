@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -21,14 +20,13 @@ public class ImageAssociationTestOptionButtonScript : MonoBehaviour
 
             if (imageAssociationTestScript.didImageOptionsEnded)
             {
-                StartCoroutine(WaitAndTurnOffScreen());
+                WaitAndTurnOffScreen();
             }
         }
     }
 
-    private IEnumerator WaitAndTurnOffScreen()
+    private void WaitAndTurnOffScreen()
     {
-        yield return new WaitForSeconds(1f);
         imageAssociationTestScript.TurnOffScreen();
     }
 

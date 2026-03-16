@@ -29,8 +29,6 @@ public class NarrativeManager : MonoBehaviour
     {
         //StartCoroutine(GameSequence());
         StartCoroutine(GameSequenceUsedForTesting());
-
-
     }
 
     private IEnumerator GameSequenceUsedForTesting()

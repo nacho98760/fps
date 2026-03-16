@@ -64,8 +64,6 @@ public class ImageAssociationTestScript : MonoBehaviour
     {
         yield return new WaitForSeconds(11f);
 
-        TurnOnMinorPartsOfScreen();
-
         bool isItTheFirstImage = true;
 
         foreach (Material imageMaterial in imageMaterials)
@@ -73,13 +71,16 @@ public class ImageAssociationTestScript : MonoBehaviour
             if (isItTheFirstImage)
             {
                 isItTheFirstImage = false;
+                TurnOnMinorPartsOfScreen();
                 ShowImageAndTextOptions(imageMaterial);
             }
             else
             {
                 yield return new WaitUntil(() => didPlayerPickAnOption);
                 didPlayerPickAnOption = false;
+                TurnOffScreen();
                 yield return new WaitForSeconds(3f);
+                TurnOnMinorPartsOfScreen();
                 ShowImageAndTextOptions(imageMaterial);
             }
         }
