@@ -78,10 +78,13 @@ public class ImageAssociationTestScript : MonoBehaviour
             else
             {
                 yield return new WaitUntil(() => didPlayerPickAnOption);
+
                 didPlayerPickAnOption = false;
                 yield return new WaitForSeconds(0.5f);
+
                 TurnOffScreen();
                 yield return new WaitForSeconds(3f);
+
                 TurnOnMinorPartsOfScreen();
                 ShowImageAndTextOptions(imageMaterial);
             }
