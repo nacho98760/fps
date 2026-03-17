@@ -53,7 +53,8 @@ public class ImageAssociationTestScript : MonoBehaviour
     void CountNumberOfImagesToShow()
     {
         numberOfImagesToShow = 0;
-        foreach (var image in imageMaterials)
+
+        for (int i = 0; i < imageMaterials.Length; i++)
         {
             numberOfImagesToShow++;
         }
@@ -78,6 +79,7 @@ public class ImageAssociationTestScript : MonoBehaviour
             {
                 yield return new WaitUntil(() => didPlayerPickAnOption);
                 didPlayerPickAnOption = false;
+                yield return new WaitForSeconds(0.5f);
                 TurnOffScreen();
                 yield return new WaitForSeconds(3f);
                 TurnOnMinorPartsOfScreen();

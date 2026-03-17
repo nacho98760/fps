@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 120;
+        //Application.targetFrameRate = 180;
     }
 
     private void Start()

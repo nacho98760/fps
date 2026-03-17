@@ -27,12 +27,14 @@ public class NarrativeManager : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(GameSequence());
-        StartCoroutine(GameSequenceUsedForTesting());
+        StartCoroutine(GameSequence());
+        //StartCoroutine(GameSequenceUsedForTesting());
     }
 
     private IEnumerator GameSequenceUsedForTesting()
     {
+        yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
+        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
         StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
         for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
         {
@@ -74,11 +76,12 @@ public class NarrativeManager : MonoBehaviour
 
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
 
-        yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
+        StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
 
         for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
         {
             yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
+            print("Executed");
             yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
         }
     }
