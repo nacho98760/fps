@@ -62,6 +62,7 @@ public class DoorScript : MonoBehaviour
 
     private void HandleNarrativeEvent(string eventName, List<string> dialogues)
     {
+
         if (transform.name == "Door1")
         {
             if (eventName == "Player Spawn Event")
@@ -73,7 +74,10 @@ public class DoorScript : MonoBehaviour
                 StartCoroutine(CloseDoor());
             }
         }
-        if (transform.name == "Door2")
+
+        //HALLWAY DOORS
+
+            if (transform.name == "Door2")
         {
             if (eventName == "End of ColorPatternTest")
             {

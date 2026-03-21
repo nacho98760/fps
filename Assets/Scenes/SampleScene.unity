@@ -13076,6 +13076,19 @@ MonoBehaviour:
     narratorClip: {fileID: 0}
     delayBefore: 0.1
     delayAfter: 0.1
+  - eventName: End of ImageAssociationTest
+    dialogues:
+    - You can now proceed to the next test room.
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
+  - eventName: Start of ObjectMemoryTest
+    dialogues:
+    - In this test, you will be shown a series of objects for a few seconds. After
+      that, we will shuffle them and ask you to place them as they were before shuffling.
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
   narratorTextScript: {fileID: 1380830024}
   colorPatternTestScript: {fileID: 8854637723345381251}
   imageAssociationTestScript: {fileID: 38486984}
@@ -24645,7 +24658,7 @@ Transform:
   m_GameObject: {fileID: 2094410410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.58, y: 1.35, z: -0.34}
+  m_LocalPosition: {x: 39.95, y: 1.35, z: -0.34}
   m_LocalScale: {x: 1, y: 1.0545, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

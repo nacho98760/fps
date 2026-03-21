@@ -33,15 +33,7 @@ public class NarrativeManager : MonoBehaviour
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
-        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
-        StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
-        for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
-        {
-            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
-            print("Executed");
-            yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
-        }
+        yield return null;
     }
 
     private IEnumerator GameSequence()
@@ -51,8 +43,6 @@ public class NarrativeManager : MonoBehaviour
 
         // Wait for player to enter Room2
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room2");
-
-        // First minigame variant
         yield return StartCoroutine(TriggerEventAndWait("First variant of ColorPatternTest"));
 
         // Wait for first minigame to finish
@@ -75,8 +65,7 @@ public class NarrativeManager : MonoBehaviour
         yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
 
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
-
-        StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
 
         for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
         {
@@ -84,6 +73,12 @@ public class NarrativeManager : MonoBehaviour
             print("Executed");
             yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
         }
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ImageAssociationTest"));
+
+        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room4");
+        yield return StartCoroutine(TriggerEventAndWait("Start of ObjectMemoryTest"));
+
     }
 
 

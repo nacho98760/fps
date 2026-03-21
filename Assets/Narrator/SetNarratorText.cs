@@ -97,6 +97,14 @@ public class SetNarratorText : MonoBehaviour
             case "In-between association images dialogue":
                 QueueDialogue(dialogues[UnityEngine.Random.Range(0, dialogues.Count)], 1.5f);
                 break;
+
+            case "End of ImageAssociationTest":
+                QueueDialogue(dialogues[0], 4f);
+                break;
+
+            case "Start of ObjectMemoryTest":
+                QueueDialogue(dialogues[0], 8f);
+                break;
         }
     }
 }
