@@ -2024,6 +2024,7 @@ Transform:
   - {fileID: 567704004}
   - {fileID: 1671188867}
   - {fileID: 433453377}
+  - {fileID: 1097594447}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191281379
@@ -3171,7 +3172,6 @@ Transform:
   - {fileID: 650761089}
   - {fileID: 38486983}
   - {fileID: 1185618238}
-  - {fileID: 1097594447}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &251413131
@@ -8576,7 +8576,7 @@ Transform:
   m_GameObject: {fileID: 713350858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8, y: 0.35, z: 1}
+  m_LocalPosition: {x: -1.8, y: 0.35, z: 0.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8605,7 +8605,7 @@ GameObject:
   - component: {fileID: 715032719}
   - component: {fileID: 715032720}
   m_Layer: 0
-  m_Name: HallwayDoor2Label
+  m_Name: HallwayDoor3Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9946,9 +9946,9 @@ GameObject:
   - component: {fileID: 799664031}
   - component: {fileID: 799664030}
   - component: {fileID: 799664029}
-  - component: {fileID: 799664028}
+  - component: {fileID: 799664032}
   m_Layer: 2
-  m_Name: Hallway2FrontCollider
+  m_Name: Hallway2Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9963,24 +9963,12 @@ Transform:
   m_GameObject: {fileID: 799664026}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.38, y: 2.25, z: -1.69}
+  m_LocalPosition: {x: 7.559, y: 2.25, z: -1.69}
   m_LocalScale: {x: 0.089805, y: 4.6963, z: 13.996033}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1807331102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &799664028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799664026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7be9cb7356c6b2b4dbbfc1a14b886264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckWhichRoomThePlayerIsAt
 --- !u!65 &799664029
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10059,6 +10047,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799664026}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &799664032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799664026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf12e6f19db46a468dde57d98e1bd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckWhenPlayerIsInMiddleOfHallways
+  playerScript: {fileID: 2094410411}
+  narrativeManager: {fileID: 1139109525}
 --- !u!1 &823447180
 GameObject:
   m_ObjectHideFlags: 0
@@ -12524,8 +12526,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097594446}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 30.16, y: 0.614, z: -1.77}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 11.45, y: 0.61399996, z: -1.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12536,7 +12538,7 @@ Transform:
   - {fileID: 1867830217}
   - {fileID: 1568028118}
   - {fileID: 1247708566}
-  m_Father: {fileID: 250918966}
+  m_Father: {fileID: 183490520}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1098866966
 GameObject:
@@ -13026,6 +13028,11 @@ MonoBehaviour:
     narratorClip: {fileID: 8300000, guid: 59d47bbff549d9c488b601efd40ededc, type: 3}
     delayBefore: 2
     delayAfter: 0.1
+  - eventName: Middle of Hallway 1
+    dialogues: []
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
   - eventName: First variant of ColorPatternTest
     dialogues:
     - 'In this first test, you will be shown a random sequence of buttons light up
@@ -13061,6 +13068,11 @@ MonoBehaviour:
     narratorClip: {fileID: 0}
     delayBefore: 0.1
     delayAfter: 0.1
+  - eventName: Middle of Hallway 2
+    dialogues: []
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
   - eventName: Start of ImageAssociationTest
     dialogues:
     - In this second test, you will be shown different scenarios and you will then
@@ -13079,6 +13091,11 @@ MonoBehaviour:
   - eventName: End of ImageAssociationTest
     dialogues:
     - You can now proceed to the next test room.
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
+  - eventName: Middle of Hallway 3
+    dialogues: []
     narratorClip: {fileID: 0}
     delayBefore: 0.1
     delayAfter: 0.1
@@ -15243,9 +15260,9 @@ GameObject:
   - component: {fileID: 1302731777}
   - component: {fileID: 1302731776}
   - component: {fileID: 1302731775}
-  - component: {fileID: 1302731774}
+  - component: {fileID: 1302731778}
   m_Layer: 2
-  m_Name: Hallway2FrontCollider
+  m_Name: Hallway3Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15260,24 +15277,12 @@ Transform:
   m_GameObject: {fileID: 1302731772}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.38, y: 2.25, z: -1.69}
+  m_LocalPosition: {x: 7.797, y: 2.25, z: -1.69}
   m_LocalScale: {x: 0.089805, y: 4.6963, z: 13.996033}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1797231814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1302731774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302731772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7be9cb7356c6b2b4dbbfc1a14b886264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckWhichRoomThePlayerIsAt
 --- !u!65 &1302731775
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15356,6 +15361,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302731772}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1302731778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302731772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf12e6f19db46a468dde57d98e1bd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckWhenPlayerIsInMiddleOfHallways
+  playerScript: {fileID: 2094410411}
+  narrativeManager: {fileID: 1139109525}
 --- !u!1 &1304418652
 GameObject:
   m_ObjectHideFlags: 0
@@ -16624,9 +16643,9 @@ GameObject:
   - component: {fileID: 1359653888}
   - component: {fileID: 1359653887}
   - component: {fileID: 1359653886}
-  - component: {fileID: 1359653885}
+  - component: {fileID: 1359653889}
   m_Layer: 2
-  m_Name: Hallway1FrontCollider
+  m_Name: Hallway1Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16641,24 +16660,12 @@ Transform:
   m_GameObject: {fileID: 1359653883}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.38, y: 2.25, z: -1.69}
+  m_LocalPosition: {x: 7.9, y: 2.25, z: -1.69}
   m_LocalScale: {x: 0.089805, y: 4.6963, z: 13.996033}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 713350859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1359653885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359653883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7be9cb7356c6b2b4dbbfc1a14b886264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckWhichRoomThePlayerIsAt
 --- !u!65 &1359653886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16737,6 +16744,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359653883}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1359653889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359653883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf12e6f19db46a468dde57d98e1bd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  playerScript: {fileID: 2094410411}
+  narrativeManager: {fileID: 1139109525}
 --- !u!1 &1369126643
 GameObject:
   m_ObjectHideFlags: 0
@@ -24658,7 +24679,7 @@ Transform:
   m_GameObject: {fileID: 2094410410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.95, y: 1.35, z: -0.34}
+  m_LocalPosition: {x: -8.977, y: 1.35, z: -0.754}
   m_LocalScale: {x: 1, y: 1.0545, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25049,7 +25070,7 @@ GameObject:
   - component: {fileID: 2128631880}
   - component: {fileID: 2128631879}
   m_Layer: 0
-  m_Name: HallwayDoor2
+  m_Name: HallwayDoor3
   m_TagString: Interactables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

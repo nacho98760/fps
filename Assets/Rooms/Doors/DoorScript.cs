@@ -62,31 +62,98 @@ public class DoorScript : MonoBehaviour
 
     private void HandleNarrativeEvent(string eventName, List<string> dialogues)
     {
-
-        if (transform.name == "Door1")
+        switch (eventName)
         {
-            if (eventName == "Player Spawn Event")
-            {
-                StartCoroutine(OpenDoor());
-            }
-            else if (eventName == "First variant of ColorPatternTest")
-            {
-                StartCoroutine(CloseDoor());
-            }
-        }
+            case "Player Spawn Event":
 
-        //HALLWAY DOORS
+                if (transform.name == "Door1")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
 
-            if (transform.name == "Door2")
-        {
-            if (eventName == "End of ColorPatternTest")
-            {
-                StartCoroutine(OpenDoor());
-            }
-            else if (eventName == "Start of ImageAssociationTest")
-            {
-                StartCoroutine(CloseDoor());
-            }
+
+            case "Middle of Hallway 1":
+
+                if (transform.name == "Door1")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                if (transform.name == "HallwayDoor1")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
+
+
+            case "First variant of ColorPatternTest":
+
+                if (transform.name == "HallwayDoor1")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                break;
+
+
+            case "End of ColorPatternTest":
+                if (transform.name == "Door2")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
+
+
+            case "Middle of Hallway 2":
+
+                if (transform.name == "Door2")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                if (transform.name == "HallwayDoor2")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
+
+
+            case "Start of ImageAssociationTest":
+
+                if (transform.name == "HallwayDoor2")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                break;
+
+
+            case "End of ImageAssociationTest":
+
+                if (transform.name == "Door3")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
+
+
+            case "Middle of Hallway 3":
+
+                if (transform.name == "Door3")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                if (transform.name == "HallwayDoor3")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
+
+
+            case "Start of ObjectMemoryTest":
+
+                if (transform.name == "HallwayDoor3")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                break;
         }
     }
 }
