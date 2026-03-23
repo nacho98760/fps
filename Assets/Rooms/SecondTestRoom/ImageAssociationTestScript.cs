@@ -71,6 +71,7 @@ public class ImageAssociationTestScript : MonoBehaviour
         {
             if (isItTheFirstImage)
             {
+                print("Here1");
                 isItTheFirstImage = false;
                 TurnOnMinorPartsOfScreen();
                 ShowImageAndTextOptions(imageMaterial);
@@ -79,8 +80,9 @@ public class ImageAssociationTestScript : MonoBehaviour
             {
                 yield return new WaitUntil(() => didPlayerPickAnOption);
 
-                didPlayerPickAnOption = false;
-                yield return new WaitForSeconds(0.5f);
+                print("Here2");
+
+                yield return new WaitForSeconds(0.3f);
 
                 TurnOffScreen();
                 yield return new WaitForSeconds(3f);

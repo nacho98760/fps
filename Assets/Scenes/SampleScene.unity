@@ -449,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 38486982}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.94, y: 0, z: -1.735}
+  m_LocalPosition: {x: 9.29, y: 0, z: -1.735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6350,8 +6350,8 @@ Transform:
   m_GameObject: {fileID: 514278829}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 8.0883, y: 4.275, z: 3.5693}
-  m_LocalScale: {x: 1, y: 9.056251, z: 18.148804}
+  m_LocalPosition: {x: 8.1166, y: 4.275, z: 3.5693}
+  m_LocalScale: {x: 1, y: 9.056251, z: 18.092543}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 713350859}
@@ -13079,8 +13079,8 @@ MonoBehaviour:
       need to pick the word that better fits the image from the options below the
       screen.
     narratorClip: {fileID: 0}
-    delayBefore: 0.1
-    delayAfter: 0.1
+    delayBefore: 1
+    delayAfter: 1
   - eventName: In-between association images dialogue
     dialogues:
     - Good, let's move on to the next one.
@@ -17653,8 +17653,8 @@ Transform:
   m_GameObject: {fileID: 1453322894}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 8.1026, y: 4.3955, z: -7.0806}
-  m_LocalScale: {x: 1, y: 8.853391, z: 18.312876}
+  m_LocalPosition: {x: 8.152, y: 4.3955, z: -7.0806}
+  m_LocalScale: {x: 1, y: 8.853391, z: 18.21414}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 713350859}
@@ -24679,7 +24679,7 @@ Transform:
   m_GameObject: {fileID: 2094410410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.977, y: 1.35, z: -0.754}
+  m_LocalPosition: {x: 39.782, y: 1.35, z: -0.754}
   m_LocalScale: {x: 1, y: 1.0545, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24744,7 +24744,7 @@ Transform:
   m_GameObject: {fileID: 2096941025}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.61, y: 2.25, z: -1.69}
+  m_LocalPosition: {x: 3.826, y: 2.25, z: -1.69}
   m_LocalScale: {x: 0.089805, y: 4.6963, z: 13.996033}
   m_ConstrainProportionsScale: 0
   m_Children: []
