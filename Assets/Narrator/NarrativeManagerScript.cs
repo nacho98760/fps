@@ -33,19 +33,7 @@ public class NarrativeManager : MonoBehaviour
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
-        yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
-
-        for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
-        {
-            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
-            print("Executed");
-            yield return new WaitForSeconds(0.1f);
-            imageAssociationTestScript.didPlayerPickAnOption = false;
-            yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
-        }
-
-        yield return StartCoroutine(TriggerEventAndWait("End of ImageAssociationTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Start of ObjectMemoryTest"));
     }
 
     private IEnumerator GameSequence()

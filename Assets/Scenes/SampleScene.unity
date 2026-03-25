@@ -1090,6 +1090,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 109636824}
+  - component: {fileID: 109636825}
+  - component: {fileID: 109636826}
   m_Layer: 0
   m_Name: Slot6Foam
   m_TagString: Untagged
@@ -1121,6 +1123,40 @@ Transform:
   - {fileID: 1607480645}
   m_Father: {fileID: 1097594447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &109636825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109636823}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.74894273, y: 0.12823856, z: 0.7309033}
+  m_Center: {x: 0.010778159, y: 0.002524197, z: 0.0032348037}
+--- !u!114 &109636826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109636823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1e1461a82aa841ac55d3b5309b428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectMemoryTestSlotsScript
+  objectMemoryTestScript: {fileID: 1565767865}
 --- !u!1 &111701705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,7 +2060,7 @@ Transform:
   - {fileID: 567704004}
   - {fileID: 1671188867}
   - {fileID: 433453377}
-  - {fileID: 1097594447}
+  - {fileID: 1565767864}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191281379
@@ -6702,6 +6738,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 562127625}
+  - component: {fileID: 562127626}
+  - component: {fileID: 562127627}
   m_Layer: 0
   m_Name: Slot5Foam
   m_TagString: Untagged
@@ -6733,6 +6771,40 @@ Transform:
   - {fileID: 658068003}
   m_Father: {fileID: 1097594447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &562127626
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562127624}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.74894273, y: 0.11483681, z: 0.7309033}
+  m_Center: {x: 0.010778159, y: -0.0041766763, z: 0.0032348037}
+--- !u!114 &562127627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562127624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1e1461a82aa841ac55d3b5309b428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectMemoryTestSlotsScript
+  objectMemoryTestScript: {fileID: 1565767865}
 --- !u!1 &563674348
 GameObject:
   m_ObjectHideFlags: 0
@@ -7097,6 +7169,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 586529223}
+  - component: {fileID: 586529224}
+  - component: {fileID: 586529225}
   m_Layer: 0
   m_Name: Slot2Foam
   m_TagString: Untagged
@@ -7128,6 +7202,40 @@ Transform:
   - {fileID: 2119117225}
   m_Father: {fileID: 1097594447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &586529224
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586529222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.74894273, y: 0.12677455, z: 0.7309033}
+  m_Center: {x: 0.010778159, y: 0.0017921925, z: 0.0032348037}
+--- !u!114 &586529225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586529222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1e1461a82aa841ac55d3b5309b428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectMemoryTestSlotsScript
+  objectMemoryTestScript: {fileID: 1565767865}
 --- !u!1 &591747290
 GameObject:
   m_ObjectHideFlags: 0
@@ -12526,20 +12634,20 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097594446}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 11.45, y: 0.61399996, z: -1.77}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1998183001}
-  - {fileID: 109636824}
-  - {fileID: 562127625}
+  - {fileID: 1247708566}
   - {fileID: 586529223}
   - {fileID: 1867830217}
   - {fileID: 1568028118}
-  - {fileID: 1247708566}
-  m_Father: {fileID: 183490520}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  - {fileID: 562127625}
+  - {fileID: 109636824}
+  m_Father: {fileID: 1565767864}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1098866966
 GameObject:
   m_ObjectHideFlags: 0
@@ -14403,6 +14511,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1247708566}
+  - component: {fileID: 1247708567}
+  - component: {fileID: 1247708568}
   m_Layer: 0
   m_Name: Slot1Foam
   m_TagString: Untagged
@@ -14434,6 +14544,40 @@ Transform:
   - {fileID: 476828800}
   m_Father: {fileID: 1097594447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1247708567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247708565}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.74894273, y: 0.14256799, z: 0.7309033}
+  m_Center: {x: 0.010778159, y: 0.009688914, z: 0.0032348037}
+--- !u!114 &1247708568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247708565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1e1461a82aa841ac55d3b5309b428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectMemoryTestSlotsScript
+  objectMemoryTestScript: {fileID: 1565767865}
 --- !u!1 &1261379626
 GameObject:
   m_ObjectHideFlags: 0
@@ -18860,6 +19004,64 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542294902}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1565767863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1565767864}
+  - component: {fileID: 1565767865}
+  m_Layer: 0
+  m_Name: ObjectMemoryTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1565767864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565767863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 11.45, y: 0.614, z: -1.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1097594447}
+  m_Father: {fileID: 183490520}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1565767865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565767863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc7028a0df930a4db6dac6406c7ecd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  foamSlots:
+  - {fileID: 1247708565}
+  - {fileID: 586529222}
+  - {fileID: 1867830216}
+  - {fileID: 1568028117}
+  - {fileID: 562127624}
+  - {fileID: 109636823}
+  defaultFloorFoamMaterial: {fileID: 2100000, guid: 4561d2c67e663524d9e51b3f4feb9549, type: 2}
+  floorFoamMaterialWhileSelected: {fileID: 2100000, guid: e617387d47b6c1e4c84532c5347bd21f, type: 2}
+  defaultWallFoamMaterial: {fileID: 2100000, guid: 8c13bd854503f5d4d950b62186995b94, type: 2}
+  wallFoamMaterialWhileSelected: {fileID: 2100000, guid: 3daedb15221db8c4088bda587788c314, type: 2}
+  defaultUpperWallFoamMaterial: {fileID: 2100000, guid: 5d5a1cfad13d790448beeaae715e3cce, type: 2}
+  upperWallFoamMaterialWhileSelected: {fileID: 2100000, guid: 6e25727ba2ca7a2419c396bea860ed6c, type: 2}
 --- !u!1 &1568028117
 GameObject:
   m_ObjectHideFlags: 0
@@ -18869,6 +19071,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568028118}
+  - component: {fileID: 1568028119}
+  - component: {fileID: 1568028120}
   m_Layer: 0
   m_Name: Slot4Foam
   m_TagString: Untagged
@@ -18900,6 +19104,40 @@ Transform:
   - {fileID: 429802367}
   m_Father: {fileID: 1097594447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1568028119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568028117}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.74894273, y: 0.13356805, z: 0.7309033}
+  m_Center: {x: 0.010778159, y: 0.005188942, z: 0.0032348037}
+--- !u!114 &1568028120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568028117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1e1461a82aa841ac55d3b5309b428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectMemoryTestSlotsScript
+  objectMemoryTestScript: {fileID: 1565767865}
 --- !u!1 &1586800334
 GameObject:
   m_ObjectHideFlags: 0
@@ -22208,8 +22446,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867830217}
+  - component: {fileID: 1867830218}
+  - component: {fileID: 1867830219}
   m_Layer: 0
-  m_Name: Slot2Foam (1)
+  m_Name: Slot3Foam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22239,6 +22479,40 @@ Transform:
   - {fileID: 2000574646}
   m_Father: {fileID: 1097594447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1867830218
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867830216}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.74894273, y: 0.13293254, z: 0.7309033}
+  m_Center: {x: 0.010778159, y: 0.0048711896, z: 0.0032348037}
+--- !u!114 &1867830219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867830216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f1e1461a82aa841ac55d3b5309b428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectMemoryTestSlotsScript
+  objectMemoryTestScript: {fileID: 1565767865}
 --- !u!1 &1868130050
 GameObject:
   m_ObjectHideFlags: 0
@@ -24679,7 +24953,7 @@ Transform:
   m_GameObject: {fileID: 2094410410}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.782, y: 1.35, z: -0.754}
+  m_LocalPosition: {x: 90.731, y: 1.35, z: -0.754}
   m_LocalScale: {x: 1, y: 1.0545, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
