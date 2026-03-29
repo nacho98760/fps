@@ -12,6 +12,7 @@ public class NarrativeManager : MonoBehaviour
     [SerializeField] private SetNarratorText narratorTextScript;
     [SerializeField] private ColorPatternTestScript colorPatternTestScript;
     [SerializeField] private ImageAssociationTestScript imageAssociationTestScript;
+    [SerializeField] private ObjectMemoryTestScript objectMemoryTestScript;
 
     private PlayerMovement playerScript;
     private Dictionary<string, NarrativeEvent> eventMap;
@@ -34,6 +35,10 @@ public class NarrativeManager : MonoBehaviour
     private IEnumerator GameSequenceUsedForTesting()
     {
         yield return StartCoroutine(TriggerEventAndWait("Start of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
+
+        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
     }
 
     private IEnumerator GameSequence()
@@ -79,6 +84,9 @@ public class NarrativeManager : MonoBehaviour
 
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room4");
         yield return StartCoroutine(TriggerEventAndWait("Start of ObjectMemoryTest"));
+
+        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
 
     }
 

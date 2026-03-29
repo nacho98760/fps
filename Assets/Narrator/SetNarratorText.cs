@@ -105,6 +105,14 @@ public class SetNarratorText : MonoBehaviour
             case "Start of ObjectMemoryTest":
                 QueueDialogue(dialogues[0], 8f);
                 break;
+
+            case "Blackout":
+                QueueDialogue(dialogues[0], 3f);
+                break;
+
+            case "End of ObjectMemoryTest":
+                QueueDialogue(dialogues[0], 3.5f);
+                break;
         }
     }
 }
