@@ -7,7 +7,12 @@ public class ObjectMemoryTestScript : MonoBehaviour
 {
     [SerializeField] private NarrativeManager narrativeManager;
     [SerializeField] private GameObject blackoutCanvasPanel;
-    [SerializeField] private GameObject[] slots;
+
+    [SerializeField] private GameObject firstRoundSlots;
+    [SerializeField] private GameObject secondRoundSlots;
+    [SerializeField] private GameObject thirdRoundSlots;
+
+    private GameObject slotsToShuffle;
 
     [NonSerialized] public bool isPlayerAllowedToPlay;
     [NonSerialized] public bool wasItTheFirstSlotObjectTouched = true;
@@ -18,7 +23,9 @@ public class ObjectMemoryTestScript : MonoBehaviour
     public GameObject[] slotsPickedToPlay;
 
     private bool isSwitching = false;
-    public bool isSlotObjectSequenceCorrect;
+    [NonSerialized] public bool isSlotObjectSequenceCorrect;
+
+    [NonSerialized] public bool isBlackoutActive;
 
     private void Awake()
     {
@@ -28,41 +35,67 @@ public class ObjectMemoryTestScript : MonoBehaviour
     private void Start()
     {
         isSlotObjectSequenceCorrect = false;
+        isBlackoutActive = false;
         isPlayerAllowedToPlay = false;
         slotsPickedToPlay = new GameObject[2];
-        ShuffleObjects();
     }
 
     private void HandleNarrativeEvent(string eventName, List<string> dialogues)
     {
+        if (eventName == "First variant of ObjectMemoryTest")
+        {
+            slotsToShuffle = firstRoundSlots;
+            firstRoundSlots.SetActive(true);
+        }
+        if (eventName == "Second variant of ObjectMemoryTest")
+        {
+            slotsToShuffle = secondRoundSlots;
+            firstRoundSlots.SetActive(false);
+            secondRoundSlots.SetActive(true);
+        }
+        if (eventName == "Third variant of ObjectMemoryTest")
+        {
+            slotsToShuffle = thirdRoundSlots;
+            secondRoundSlots.SetActive(false);
+            thirdRoundSlots.SetActive(true);
+        }
+
         if (eventName == "Blackout")
         {
-            StartCoroutine(ActivateBlackoutAndShuffle());
+            StartCoroutine(ActivateBlackoutAndShuffle(slotsToShuffle));
             isPlayerAllowedToPlay = true;
+        }
+
+        if (eventName == "End of ObjectMemoryTest")
+        {
+            isSlotObjectSequenceCorrect = false;
+            isPlayerAllowedToPlay = false;
         }
     }
 
-    private IEnumerator ActivateBlackoutAndShuffle()
+    private IEnumerator ActivateBlackoutAndShuffle(GameObject roundSlotsToShuffle)
     {
+        isBlackoutActive = true;
         blackoutCanvasPanel.SetActive(true);
         yield return new WaitForSeconds(0.5f);
 
-        ShuffleObjects();
+        ShuffleObjects(roundSlotsToShuffle);
         yield return new WaitForSeconds(2.5f);
 
         blackoutCanvasPanel.SetActive(false);
+        isBlackoutActive = false;
     }
 
-    private void ShuffleObjects()
+    private void ShuffleObjects(GameObject roundSlotsToShuffle)
     {
         List<GameObject> slotObjects = new List<GameObject>();
 
         slotObjectsOrderBeforeShuffling.Clear();
 
-        foreach (GameObject slot in slots)
+        foreach (Transform slot in roundSlotsToShuffle.transform)
         {
-            slotObjectsOrderBeforeShuffling.Add(slot.transform.GetChild(0).gameObject);
-            slotObjects.Add(slot.transform.GetChild(0).gameObject);
+            slotObjectsOrderBeforeShuffling.Add(slot.GetChild(0).gameObject);
+            slotObjects.Add(slot.GetChild(0).gameObject);
         }
 
         // Fisher-Yates shuffle
@@ -72,9 +105,9 @@ public class ObjectMemoryTestScript : MonoBehaviour
             (slotObjects[i], slotObjects[j]) = (slotObjects[j], slotObjects[i]);
         }
 
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < roundSlotsToShuffle.transform.childCount; i++)
         {
-            slotObjects[i].transform.SetParent(slots[i].transform, false);
+            slotObjects[i].transform.SetParent(roundSlotsToShuffle.transform.GetChild(i).transform, false);
         }
     }
 
@@ -109,9 +142,11 @@ public class ObjectMemoryTestScript : MonoBehaviour
     {
         bool isSequenceCorrect = true;
 
-        for (int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slotsToShuffle.transform.childCount; i++)
         {
-            if (slots[i].transform.GetChild(0).gameObject != slotObjectsOrderBeforeShuffling[i])
+            Transform slot = slotsToShuffle.transform.GetChild(i);
+
+            if (slot.transform.GetChild(0).gameObject != slotObjectsOrderBeforeShuffling[i])
             {
                 isSequenceCorrect = false;
                 break;

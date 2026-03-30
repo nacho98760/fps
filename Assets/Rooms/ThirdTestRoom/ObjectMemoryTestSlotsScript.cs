@@ -17,8 +17,9 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (objectMemoryTestScript.isPlayerAllowedToPlay)
+        if (objectMemoryTestScript.isPlayerAllowedToPlay && objectMemoryTestScript.isBlackoutActive == false)
         {
+            print("tRUE");
             if (objectMemoryTestScript.wasItTheFirstSlotObjectTouched)
             {
                 objectMemoryTestScript.wasItTheFirstSlotObjectTouched = false;
