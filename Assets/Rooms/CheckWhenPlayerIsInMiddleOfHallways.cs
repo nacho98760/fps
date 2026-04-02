@@ -26,6 +26,12 @@ public class CheckWhenPlayerIsInMiddleOfHallways : MonoBehaviour
                 playerScript.playerCurrentRoom = transform.root.name;
                 narrativeManager.TriggerEvent("Middle of Hallway 3");
             }
+
+            else if (transform.root.name == "Hallway4")
+            {
+                playerScript.playerCurrentRoom = transform.root.name;
+                narrativeManager.TriggerEvent("Middle of Hallway 4");
+            }
         }
     }
 }

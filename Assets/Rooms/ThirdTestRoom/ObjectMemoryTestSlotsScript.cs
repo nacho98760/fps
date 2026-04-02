@@ -16,45 +16,67 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
         objectState = ObjectState.NotHoveredNorSelected;
     }
 
+    private void Update()
+    {
+        ChooseEmission();
+    }
+
     private void OnMouseEnter()
     {
+        if (objectState == ObjectState.Selected)
+            return;
+        
         objectState = ObjectState.Hovered;
-
-        ActivateOrDeactivateEmissionOnSlot(true, hoveredEmissionIntensity);
     }
 
     private void OnMouseExit()
     {
         if (objectState == ObjectState.Hovered)
         {
-            ActivateOrDeactivateEmissionOnSlot(false);
+            objectState = ObjectState.NotHoveredNorSelected;
         }
     }
 
     private void OnMouseDown()
     {
-        objectState = ObjectState.Selected;
-
-        ActivateOrDeactivateEmissionOnSlot(true, selectedEmissionIntensity);
-
         if (objectMemoryTestScript.isPlayerAllowedToPlay && objectMemoryTestScript.isBlackoutActive == false)
         {
-            if (objectMemoryTestScript.wasItTheFirstSlotObjectTouched)
+            if (objectState == ObjectState.Selected)
             {
-                objectMemoryTestScript.wasItTheFirstSlotObjectTouched = false;
-                objectMemoryTestScript.slotsPickedToPlay[0] = this.gameObject;
+                objectMemoryTestScript.slotsPickedToPlay.Remove(this.gameObject);
+                objectState = ObjectState.Hovered;
+                return;
             }
-            else
+
+            if (objectMemoryTestScript.slotsPickedToPlay.Count < 2)
             {
-                //If the second slot object picked is the same as the first one, we do nothing
-                if (this.gameObject != objectMemoryTestScript.slotsPickedToPlay[0])
+                objectState = ObjectState.Selected;
+                objectMemoryTestScript.slotsPickedToPlay.Add(this.gameObject);
+
+                if (objectMemoryTestScript.slotsPickedToPlay.Count == 2)
                 {
-                    objectMemoryTestScript.slotsPickedToPlay[1] = this.gameObject;
                     objectMemoryTestScript.SwitchObjects();
                 }
             }
         }
     }
+
+    private void ChooseEmission()
+    {
+        if (objectState == ObjectState.NotHoveredNorSelected)
+        {
+            ActivateOrDeactivateEmissionOnSlot(false);
+        }
+        else if (objectState == ObjectState.Hovered)
+        {
+            ActivateOrDeactivateEmissionOnSlot(true, hoveredEmissionIntensity);
+        }
+        else if (objectState == ObjectState.Selected)
+        {
+            ActivateOrDeactivateEmissionOnSlot(true, selectedEmissionIntensity);
+        }
+    }
+
 
     private void ActivateOrDeactivateEmissionOnSlot(bool activate, float intensity = 0f)
     {
@@ -64,7 +86,7 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
         {
             foreach (Material objMaterial in slotObjectModel.GetComponent<Renderer>().materials)
             {
-                if (activate == true)
+                if (activate)
                 {
                     ActivateEmission(objMaterial, intensity);
                 }

@@ -154,6 +154,28 @@ public class DoorScript : MonoBehaviour
                     StartCoroutine(CloseDoor());
                 }
                 break;
+
+
+            case "End of ObjectMemoryTest":
+
+                if (transform.name == "Door4")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
+
+
+            case "Middle of Hallway 4":
+
+                if (transform.name == "Door4")
+                {
+                    StartCoroutine(CloseDoor());
+                }
+                if (transform.name == "HallwayDoor4")
+                {
+                    StartCoroutine(OpenDoor());
+                }
+                break;
         }
     }
 }

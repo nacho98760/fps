@@ -36,59 +36,54 @@ public class NarrativeManager : MonoBehaviour
     {
         yield return StartCoroutine(TriggerEventAndWait("First variant of ObjectMemoryTest"));
         yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
 
         yield return StartCoroutine(TriggerEventAndWait("Second variant of ObjectMemoryTest"));
         yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
 
         yield return StartCoroutine(TriggerEventAndWait("Third variant of ObjectMemoryTest"));
         yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
     }
 
 
     private IEnumerator GameSequence()
     {
-        // Player spawns
         yield return StartCoroutine(TriggerEventAndWait("Player Spawn Event"));
 
-        // Wait for player to enter Room2
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room2");
+
         yield return StartCoroutine(TriggerEventAndWait("First variant of ColorPatternTest"));
 
-        // Wait for first minigame to finish
         yield return new WaitUntil(() => colorPatternTestScript.didFirstMinigameVariantFinished);
 
-        // Show result dialogue and wait for it to finish
         string firstResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
         yield return StartCoroutine(TriggerEventAndWait(firstResultEvent));
 
-        // Second minigame variant
         yield return StartCoroutine(TriggerEventAndWait("Second variant of ColorPatternTest"));
 
-        // Wait for second minigame to finish
         yield return new WaitUntil(() => colorPatternTestScript.didSecondMinigameVariantFinished);
 
-        // Show result dialogue and wait for it to finish
         string secondResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
         yield return StartCoroutine(TriggerEventAndWait(secondResultEvent));
 
         yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
 
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
+
         yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
 
         for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
         {
             yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
-            print("Executed");
+
             imageAssociationTestScript.didPlayerPickAnOption = false;
             yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
         }
@@ -96,18 +91,24 @@ public class NarrativeManager : MonoBehaviour
         yield return StartCoroutine(TriggerEventAndWait("End of ImageAssociationTest"));
 
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room4");
-        yield return StartCoroutine(TriggerEventAndWait("First variant of ObjectMemoryTest"));
-        
 
+        yield return StartCoroutine(TriggerEventAndWait("First variant of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
 
         yield return StartCoroutine(TriggerEventAndWait("Second variant of ObjectMemoryTest"));
-
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
 
         yield return StartCoroutine(TriggerEventAndWait("Third variant of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
+        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
     }
 
 
@@ -120,7 +121,8 @@ public class NarrativeManager : MonoBehaviour
 
         OnNarrativeEventTriggered?.Invoke(ev.eventName, ev.dialogues);
 
-        PlayNarratorVoiceOnAllSpeakers(ev.narratorClip);
+        //----------Disabled when testing----------
+        //PlayNarratorVoiceOnAllSpeakers(ev.narratorClip);
 
         yield return StartCoroutine(narratorTextScript.WaitForDialogueToFinish());
 

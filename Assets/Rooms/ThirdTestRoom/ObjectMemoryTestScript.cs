@@ -20,7 +20,7 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
     public List<GameObject> slotObjectsOrderBeforeShuffling;
 
-    public GameObject[] slotsPickedToPlay;
+    public List<GameObject> slotsPickedToPlay;
 
     private bool isSwitching = false;
     [NonSerialized] public bool isSlotObjectSequenceCorrect;
@@ -37,7 +37,7 @@ public class ObjectMemoryTestScript : MonoBehaviour
         isSlotObjectSequenceCorrect = false;
         isBlackoutActive = false;
         isPlayerAllowedToPlay = false;
-        slotsPickedToPlay = new GameObject[2];
+        slotsPickedToPlay = new List<GameObject>();
     }
 
     private void HandleNarrativeEvent(string eventName, List<string> dialogues)
@@ -62,17 +62,22 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
         if (eventName == "Blackout")
         {
-            print("Blackout executed");
             StartCoroutine(ActivateBlackoutAndShuffle(slotsToShuffle));
             isPlayerAllowedToPlay = true;
         }
 
-        if (eventName == "End of ObjectMemoryTest")
+        if (eventName == "End of ObjectMemoryTest Round")
         {
             isSlotObjectSequenceCorrect = false;
             isPlayerAllowedToPlay = false;
         }
+
+        if (eventName == "End of ObjectMemoryTest")
+        {
+            //---
+        }
     }
+
 
     private IEnumerator ActivateBlackoutAndShuffle(GameObject roundSlotsToShuffle)
     {
@@ -100,14 +105,7 @@ public class ObjectMemoryTestScript : MonoBehaviour
             slotObjects.Add(slot.GetChild(0).gameObject);
         }
 
-        // Fisher-Yates shuffle
-        for (int i = slotObjects.Count - 1; i > 0; i--)
-        {
-            int j = UnityEngine.Random.Range(0, i + 1);
-            (slotObjects[i], slotObjects[j]) = (slotObjects[j], slotObjects[i]);
-        }
-
-        while (slotObjects == slotObjectsOrderBeforeShuffling)
+        do
         {
             // Fisher-Yates shuffle
             for (int i = slotObjects.Count - 1; i > 0; i--)
@@ -115,7 +113,7 @@ public class ObjectMemoryTestScript : MonoBehaviour
                 int j = UnityEngine.Random.Range(0, i + 1);
                 (slotObjects[i], slotObjects[j]) = (slotObjects[j], slotObjects[i]);
             }
-        }
+        } while (slotObjects == slotObjectsOrderBeforeShuffling);
 
         for (int i = 0; i < roundSlotsToShuffle.transform.childCount; i++)
         {
@@ -131,11 +129,11 @@ public class ObjectMemoryTestScript : MonoBehaviour
         
         isSwitching = true;
 
+        slotsPickedToPlay[0].transform.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
+        slotsPickedToPlay[1].transform.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
+
         GameObject firstObject = slotsPickedToPlay[0].transform.GetChild(0).gameObject;
         GameObject secondObject = slotsPickedToPlay[1].transform.GetChild(0).gameObject;
-
-        firstObject.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
-        secondObject.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
 
         firstObject.transform.parent = slotsPickedToPlay[1].transform;
         firstObject.transform.position = slotsPickedToPlay[1].transform.position;
@@ -143,14 +141,13 @@ public class ObjectMemoryTestScript : MonoBehaviour
         secondObject.transform.parent = slotsPickedToPlay[0].transform;
         secondObject.transform.position = slotsPickedToPlay[0].transform.position;
 
-        Array.Clear(slotsPickedToPlay, 0, slotsPickedToPlay.Length);
+        slotsPickedToPlay.Clear();
 
         //Reset values
         wasItTheFirstSlotObjectTouched = true;
         isSwitching = false;
 
         isSlotObjectSequenceCorrect = CheckIfItsTheCorrectOrder();
-        print(isSlotObjectSequenceCorrect);
     }
 
     private bool CheckIfItsTheCorrectOrder()
@@ -170,5 +167,4 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
         return isSequenceCorrect;
     }
-
 }
