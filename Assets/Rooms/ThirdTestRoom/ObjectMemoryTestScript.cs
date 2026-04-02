@@ -62,6 +62,7 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
         if (eventName == "Blackout")
         {
+            print("Blackout executed");
             StartCoroutine(ActivateBlackoutAndShuffle(slotsToShuffle));
             isPlayerAllowedToPlay = true;
         }
@@ -88,6 +89,7 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
     private void ShuffleObjects(GameObject roundSlotsToShuffle)
     {
+        print("Shuffle started");
         List<GameObject> slotObjects = new List<GameObject>();
 
         slotObjectsOrderBeforeShuffling.Clear();
@@ -103,6 +105,16 @@ public class ObjectMemoryTestScript : MonoBehaviour
         {
             int j = UnityEngine.Random.Range(0, i + 1);
             (slotObjects[i], slotObjects[j]) = (slotObjects[j], slotObjects[i]);
+        }
+
+        while (slotObjects == slotObjectsOrderBeforeShuffling)
+        {
+            // Fisher-Yates shuffle
+            for (int i = slotObjects.Count - 1; i > 0; i--)
+            {
+                int j = UnityEngine.Random.Range(0, i + 1);
+                (slotObjects[i], slotObjects[j]) = (slotObjects[j], slotObjects[i]);
+            }
         }
 
         for (int i = 0; i < roundSlotsToShuffle.transform.childCount; i++)
@@ -121,6 +133,9 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
         GameObject firstObject = slotsPickedToPlay[0].transform.GetChild(0).gameObject;
         GameObject secondObject = slotsPickedToPlay[1].transform.GetChild(0).gameObject;
+
+        firstObject.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
+        secondObject.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
 
         firstObject.transform.parent = slotsPickedToPlay[1].transform;
         firstObject.transform.position = slotsPickedToPlay[1].transform.position;

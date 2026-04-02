@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -5,45 +6,39 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
 {
     [SerializeField] private ObjectMemoryTestScript objectMemoryTestScript;
 
-    private float hoveredEmissionIntensity = 0.3f;
-    private float selectedEmissionIntensity = 1.5f;
+    private float hoveredEmissionIntensity = 0.035f;
+    private float selectedEmissionIntensity = 0.2f;
 
-    private GameObject modelInsideObjSlot;
+    public ObjectState objectState;
 
-    private void Awake()
+    private void Start()
     {
-        modelInsideObjSlot = transform.GetChild(0).GetChild(0).gameObject;
+        objectState = ObjectState.NotHoveredNorSelected;
     }
 
     private void OnMouseEnter()
     {
-        foreach (Material objMaterial in modelInsideObjSlot.GetComponent<Renderer>().materials)
-        {
-            ActivateEmission(objMaterial, hoveredEmissionIntensity);
-        }
+        objectState = ObjectState.Hovered;
+
+        ActivateOrDeactivateEmissionOnSlot(true, hoveredEmissionIntensity);
     }
 
     private void OnMouseExit()
     {
-        foreach (Material objMaterial in modelInsideObjSlot.GetComponent<Renderer>().materials)
+        if (objectState == ObjectState.Hovered)
         {
-            DeactivateEmission(objMaterial);
+            ActivateOrDeactivateEmissionOnSlot(false);
         }
     }
 
     private void OnMouseDown()
     {
+        objectState = ObjectState.Selected;
+
+        ActivateOrDeactivateEmissionOnSlot(true, selectedEmissionIntensity);
+
         if (objectMemoryTestScript.isPlayerAllowedToPlay && objectMemoryTestScript.isBlackoutActive == false)
         {
-
-            // Check this (If player selects the object and then pulls the cursor away from it, the object emission will deactivate even though it wasnt the hoverEmission)
-            /*
-            foreach (Material objMaterial in modelInsideObjSlot.GetComponent<Renderer>().materials)
-            {
-                ActivateEmission(objMaterial, hoveredEmissionIntensity);
-            }
-            */
-
             if (objectMemoryTestScript.wasItTheFirstSlotObjectTouched)
             {
                 objectMemoryTestScript.wasItTheFirstSlotObjectTouched = false;
@@ -56,6 +51,45 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
                 {
                     objectMemoryTestScript.slotsPickedToPlay[1] = this.gameObject;
                     objectMemoryTestScript.SwitchObjects();
+                }
+            }
+        }
+    }
+
+    private void ActivateOrDeactivateEmissionOnSlot(bool activate, float intensity = 0f)
+    {
+        GameObject slotObjectModel = gameObject.transform.GetChild(0).GetChild(0).gameObject;
+
+        if (slotObjectModel.TryGetComponent<Renderer>(out Renderer rend))
+        {
+            foreach (Material objMaterial in slotObjectModel.GetComponent<Renderer>().materials)
+            {
+                if (activate == true)
+                {
+                    ActivateEmission(objMaterial, intensity);
+                }
+                else
+                {
+                    DeactivateEmission(objMaterial);
+                }
+            }
+        }
+
+        // Double check for obj models which have separate materials inside (Ex. Watch)
+        if (slotObjectModel.transform.childCount > 0)
+        {
+            foreach (Renderer modelChildRenderer in slotObjectModel.GetComponentsInChildren<Renderer>())
+            {
+                foreach (Material objMaterial in modelChildRenderer.materials)
+                {
+                    if (activate == true)
+                    {
+                        ActivateEmission(objMaterial, intensity);
+                    }
+                    else
+                    {
+                        DeactivateEmission(objMaterial);
+                    }
                 }
             }
         }
@@ -74,4 +108,12 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
     {
         objMaterial.DisableKeyword("_EMISSION");
     }
+}
+
+
+public enum ObjectState
+{
+    NotHoveredNorSelected,
+    Hovered,
+    Selected,
 }
