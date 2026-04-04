@@ -1,0 +1,11 @@
+Model Information:
+* title:	SceneW.gltf
+* source:	https://sketchfab.com/3d-models/scenewgltf-80e8d90a78944230b6d86e349a9c760f
+* author:	jalalbelych301 (https://sketchfab.com/jalalbelych301)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "SceneW.gltf" (https://sketchfab.com/3d-models/scenewgltf-80e8d90a78944230b6d86e349a9c760f) by jalalbelych301 (https://sketchfab.com/jalalbelych301) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
