@@ -1,8 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObjectMemoryTestSlotsScript : MonoBehaviour
+public class SlotObjectModelScript : MonoBehaviour
 {
     [SerializeField] private ObjectMemoryTestScript objectMemoryTestScript;
 
@@ -25,7 +23,7 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
     {
         if (objectState == ObjectState.Selected)
             return;
-        
+
         objectState = ObjectState.Hovered;
     }
 
@@ -43,7 +41,7 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
         {
             if (objectState == ObjectState.Selected)
             {
-                objectMemoryTestScript.slotsPickedToPlay.Remove(this.gameObject);
+                objectMemoryTestScript.slotsPickedToPlay.Remove(transform.parent.parent.gameObject);
                 objectState = ObjectState.Hovered;
                 return;
             }
@@ -51,7 +49,7 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
             if (objectMemoryTestScript.slotsPickedToPlay.Count < 2)
             {
                 objectState = ObjectState.Selected;
-                objectMemoryTestScript.slotsPickedToPlay.Add(this.gameObject);
+                objectMemoryTestScript.slotsPickedToPlay.Add(transform.parent.parent.gameObject);
 
                 if (objectMemoryTestScript.slotsPickedToPlay.Count == 2)
                 {
@@ -80,11 +78,9 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
 
     private void ActivateOrDeactivateEmissionOnSlot(bool activate, float intensity = 0f)
     {
-        GameObject slotObjectModel = gameObject.transform.GetChild(0).GetChild(0).gameObject;
-
-        if (slotObjectModel.TryGetComponent<Renderer>(out Renderer rend))
+        if (TryGetComponent<Renderer>(out Renderer rend))
         {
-            foreach (Material objMaterial in slotObjectModel.GetComponent<Renderer>().materials)
+            foreach (Material objMaterial in GetComponent<Renderer>().materials)
             {
                 if (activate)
                 {
@@ -98,9 +94,9 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
         }
 
         // Double check for obj models which have separate materials inside (Ex. Watch)
-        if (slotObjectModel.transform.childCount > 0)
+        if (transform.childCount > 0)
         {
-            foreach (Renderer modelChildRenderer in slotObjectModel.GetComponentsInChildren<Renderer>())
+            foreach (Renderer modelChildRenderer in GetComponentsInChildren<Renderer>())
             {
                 foreach (Material objMaterial in modelChildRenderer.materials)
                 {
@@ -130,8 +126,8 @@ public class ObjectMemoryTestSlotsScript : MonoBehaviour
     {
         objMaterial.DisableKeyword("_EMISSION");
     }
-}
 
+}
 
 public enum ObjectState
 {
@@ -139,3 +135,4 @@ public enum ObjectState
     Hovered,
     Selected,
 }
+

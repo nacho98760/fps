@@ -129,17 +129,21 @@ public class ObjectMemoryTestScript : MonoBehaviour
         
         isSwitching = true;
 
-        slotsPickedToPlay[0].transform.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
-        slotsPickedToPlay[1].transform.GetComponent<ObjectMemoryTestSlotsScript>().objectState = ObjectState.NotHoveredNorSelected;
-
         GameObject firstObject = slotsPickedToPlay[0].transform.GetChild(0).gameObject;
         GameObject secondObject = slotsPickedToPlay[1].transform.GetChild(0).gameObject;
+
+        SlotObjectModelScript firstSlotObjectModel = firstObject.transform.GetChild(0).gameObject.GetComponent<SlotObjectModelScript>();
+        SlotObjectModelScript secondSlotObjectModel = secondObject.transform.GetChild(0).gameObject.GetComponent<SlotObjectModelScript>();
+
 
         firstObject.transform.parent = slotsPickedToPlay[1].transform;
         firstObject.transform.position = slotsPickedToPlay[1].transform.position;
 
         secondObject.transform.parent = slotsPickedToPlay[0].transform;
         secondObject.transform.position = slotsPickedToPlay[0].transform.position;
+
+        firstSlotObjectModel.objectState = ObjectState.NotHoveredNorSelected;
+        secondSlotObjectModel.objectState = ObjectState.NotHoveredNorSelected;
 
         slotsPickedToPlay.Clear();
 

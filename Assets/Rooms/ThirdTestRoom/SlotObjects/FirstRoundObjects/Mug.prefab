@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1860854235043005343}
   - component: {fileID: 3176801622873968556}
   - component: {fileID: 2032102589977856875}
+  - component: {fileID: 2930022472300514698}
   m_Layer: 0
   m_Name: Mug
   m_TagString: Untagged
@@ -90,3 +91,15 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2930022472300514698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850956678370926640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178f9d34805535646ae8571254d3dda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlotObjectModelScript

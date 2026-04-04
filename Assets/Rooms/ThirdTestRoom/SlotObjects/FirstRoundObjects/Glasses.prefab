@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8184817786270469069}
   - component: {fileID: 3425315944742055790}
   - component: {fileID: 7098489012060972187}
+  - component: {fileID: 6167231919942823694}
   m_Layer: 0
   m_Name: Glasses
   m_TagString: Untagged
@@ -90,3 +91,15 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6167231919942823694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755641504368317368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178f9d34805535646ae8571254d3dda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
