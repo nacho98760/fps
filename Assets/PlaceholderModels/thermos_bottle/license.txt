@@ -1,0 +1,11 @@
+Model Information:
+* title:	Thermos Bottle
+* source:	https://sketchfab.com/3d-models/thermos-bottle-8354e3f762b749d284aada72aeb18773
+* author:	Boxroom 3D (https://sketchfab.com/Boxroom_3D)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Thermos Bottle" (https://sketchfab.com/3d-models/thermos-bottle-8354e3f762b749d284aada72aeb18773) by Boxroom 3D (https://sketchfab.com/Boxroom_3D) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

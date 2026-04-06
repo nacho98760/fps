@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 8579080927419056824}
   - component: {fileID: 1802819959084395396}
   m_Layer: 0
-  m_Name: FreeCar
+  m_Name: ToyCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,8 +298,8 @@ Transform:
   m_GameObject: {fileID: 7277213842552760446}
   serializedVersion: 2
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
-  m_LocalPosition: {x: 90.635, y: 0.897, z: -0.16442454}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3371585943910330459}
