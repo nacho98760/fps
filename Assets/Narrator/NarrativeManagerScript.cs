@@ -51,6 +51,8 @@ public class NarrativeManager : MonoBehaviour
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
 
         yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
     }
 
 
