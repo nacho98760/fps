@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &662535
 Transform:
   m_ObjectHideFlags: 0
@@ -12931,6 +12931,13 @@ MonoBehaviour:
     dialogues:
     - In this test, you will be shown a series of objects for a few seconds. After
       that, we will shuffle them and ask you to place them as they were before shuffling.
+    narratorClip: {fileID: 0}
+    delayBefore: 0.1
+    delayAfter: 0.1
+  - eventName: Advice on cameras
+    dialogues:
+    - 'I should mention, for your comfort, this room has no cameras. Your responses
+      are kept between us. '
     narratorClip: {fileID: 0}
     delayBefore: 0.1
     delayAfter: 0.1
