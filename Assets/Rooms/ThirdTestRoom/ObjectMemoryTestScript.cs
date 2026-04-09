@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ObjectMemoryTestScript : MonoBehaviour
 {
@@ -135,12 +136,13 @@ public class ObjectMemoryTestScript : MonoBehaviour
         SlotObjectModelScript firstSlotObjectModel = firstObject.transform.GetChild(0).gameObject.GetComponent<SlotObjectModelScript>();
         SlotObjectModelScript secondSlotObjectModel = secondObject.transform.GetChild(0).gameObject.GetComponent<SlotObjectModelScript>();
 
-
+        //-------Object Switch-------
         firstObject.transform.parent = slotsPickedToPlay[1].transform;
-        firstObject.transform.position = slotsPickedToPlay[1].transform.position;
-
         secondObject.transform.parent = slotsPickedToPlay[0].transform;
-        secondObject.transform.position = slotsPickedToPlay[0].transform.position;
+
+        StartCoroutine(ObjectSwitchTransition(firstObject, slotsPickedToPlay[1]));
+        StartCoroutine(ObjectSwitchTransition(secondObject, slotsPickedToPlay[0]));
+        //-------Object Switch-------
 
         firstSlotObjectModel.objectState = ObjectState.NotHoveredNorSelected;
         secondSlotObjectModel.objectState = ObjectState.NotHoveredNorSelected;
@@ -153,6 +155,23 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
         isSlotObjectSequenceCorrect = CheckIfItsTheCorrectOrder();
     }
+
+
+    private IEnumerator ObjectSwitchTransition(GameObject obj, GameObject slot)
+    {
+        float timePassed = 0f;
+        float transitionDuration = 0.75f;
+
+        while (timePassed < transitionDuration)
+        {
+            timePassed += Time.deltaTime;
+            obj.transform.position = Vector3.Lerp(obj.transform.position, slot.transform.position, timePassed / transitionDuration);
+            yield return null;
+        }
+
+        obj.transform.position = slot.transform.position;
+    }
+
 
     private bool CheckIfItsTheCorrectOrder()
     {
