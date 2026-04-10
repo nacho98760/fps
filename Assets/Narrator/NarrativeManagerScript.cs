@@ -28,32 +28,27 @@ public class NarrativeManager : MonoBehaviour
 
     private void Start()
     {
+        //StartCoroutine(GameSequence());
         StartCoroutine(GameSequenceUsedForTesting());
-        //StartCoroutine(GameSequenceUsedForTesting());
     }
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        yield return StartCoroutine(TriggerEventAndWait("First variant of ObjectMemoryTest"));
-        yield return StartCoroutine(TriggerEventAndWait("Advice on cameras"));
-        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+        yield return StartCoroutine(TriggerEventAndWait("First variant of ColorPatternTest"));
 
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+        yield return new WaitUntil(() => colorPatternTestScript.didFirstMinigameVariantFinished);
 
-        yield return StartCoroutine(TriggerEventAndWait("Second variant of ObjectMemoryTest"));
-        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+        string firstResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
+        yield return StartCoroutine(TriggerEventAndWait(firstResultEvent));
 
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+        yield return StartCoroutine(TriggerEventAndWait("Second variant of ColorPatternTest"));
 
-        yield return StartCoroutine(TriggerEventAndWait("Third variant of ObjectMemoryTest"));
-        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+        yield return new WaitUntil(() => colorPatternTestScript.didSecondMinigameVariantFinished);
 
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+        string secondResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
+        yield return StartCoroutine(TriggerEventAndWait(secondResultEvent));
 
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
     }
 
 

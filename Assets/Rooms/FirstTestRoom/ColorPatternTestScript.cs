@@ -10,6 +10,8 @@ public class ColorPatternTestScript : MonoBehaviour
     [SerializeField] private ColorButtonScript[] buttons;
     [SerializeField] private NarrativeManager narrativeManager;
 
+    [SerializeField] private GuessButtonFunctionalityScript guessButtonFunctionalityScript;
+
     public ColorButtonScript[] buttonsPickedForMinigame;
 
     [NonSerialized] public int buttonCountForMinigame = 5;
@@ -20,6 +22,7 @@ public class ColorPatternTestScript : MonoBehaviour
     [NonSerialized] public bool didSecondMinigameVariantFinished = false;
 
     [NonSerialized] public bool isPlayerAllowedToPlay;
+
 
     public int minigameVariant = 1;
 
@@ -45,6 +48,9 @@ public class ColorPatternTestScript : MonoBehaviour
 
         if (eventName == "Second variant of ColorPatternTest")
         {
+            numberOfPressedButtons = 0;
+            guessButtonFunctionalityScript.DeactivateEmisionAndTextForAllButtons();
+
             minigameVariant = 2;
             StartCoroutine(PlayMinigame(minigameVariant));
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class ColorButtonScript : MonoBehaviour
@@ -8,12 +9,16 @@ public class ColorButtonScript : MonoBehaviour
     [SerializeField] private AudioSource colorButtonSound;
     [SerializeField] private ColorPatternTestScript colorPatternScript;
 
+    [SerializeField] private GuessButtonFunctionalityScript GuessButtonFunctionalityScript;
+
+    public TMP_Text buttonNumber;
+
     private bool isButtonOnCooldown = false;
 
     private void Awake()
     {
         objRenderer = GetComponent<Renderer>();
-        objRenderer.material.DisableKeyword("_EMISSION");
+        Deactivate();  // deactivate emission
     }
 
     private void OnMouseDown()
@@ -34,6 +39,9 @@ public class ColorButtonScript : MonoBehaviour
             StartCoroutine(FullButtonPressed());
 
             ColorButtonScript rightSequenceButton = colorPatternScript.buttonsPickedForMinigame[colorPatternScript.numberOfPressedButtons - 1];
+
+            GuessButtonFunctionalityScript.guessButtons[colorPatternScript.numberOfPressedButtons - 1].ActivateEmission();
+            GuessButtonFunctionalityScript.guessButtons[colorPatternScript.numberOfPressedButtons - 1].guessButtonNumber.text = rightSequenceButton.buttonNumber.text;
 
             if (gameObject.name != rightSequenceButton.gameObject.name)
             {
