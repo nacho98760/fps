@@ -41,16 +41,11 @@ public class ColorButtonScript : MonoBehaviour
             ColorButtonScript rightSequenceButton = colorPatternScript.buttonsPickedForMinigame[colorPatternScript.numberOfPressedButtons - 1];
 
             GuessButtonFunctionalityScript.guessButtons[colorPatternScript.numberOfPressedButtons - 1].ActivateEmission();
-            GuessButtonFunctionalityScript.guessButtons[colorPatternScript.numberOfPressedButtons - 1].guessButtonNumber.text = rightSequenceButton.buttonNumber.text;
+            GuessButtonFunctionalityScript.guessButtons[colorPatternScript.numberOfPressedButtons - 1].guessButtonNumber.text = buttonNumber.text;
 
             if (gameObject.name != rightSequenceButton.gameObject.name)
             {
                 colorPatternScript.isSequenceRight = false;
-            }
-
-            if (colorPatternScript.numberOfPressedButtons == colorPatternScript.buttonCountForMinigame)
-            {
-                colorPatternScript.ReportEndOfMinigame(colorPatternScript.isSequenceRight);
             }
         }
     }
