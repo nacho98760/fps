@@ -34,21 +34,22 @@ public class NarrativeManager : MonoBehaviour
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        yield return StartCoroutine(TriggerEventAndWait("First variant of ColorPatternTest"));
+        playerScript.playerCurrentRoom = "Hallway2";
+        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
 
-        yield return new WaitUntil(() => colorPatternTestScript.didFirstMinigameVariantFinished);
+        yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
 
-        string firstResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
-        yield return StartCoroutine(TriggerEventAndWait(firstResultEvent));
+        for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
+        {
+            print("Executed");
+            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOptionGlobal);
+            imageAssociationTestScript.didPlayerPickAnOptionGlobal = false;
+            print("Hey");
 
-        yield return StartCoroutine(TriggerEventAndWait("Second variant of ColorPatternTest"));
+            yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
+        }
 
-        yield return new WaitUntil(() => colorPatternTestScript.didSecondMinigameVariantFinished);
-
-        string secondResultEvent = colorPatternTestScript.isSequenceRight ? "Minigame Success" : "Minigame Failure";
-        yield return StartCoroutine(TriggerEventAndWait(secondResultEvent));
-
-        yield return StartCoroutine(TriggerEventAndWait("End of ColorPatternTest"));
+        yield return StartCoroutine(TriggerEventAndWait("End of ImageAssociationTest"));
     }
 
 
@@ -80,9 +81,11 @@ public class NarrativeManager : MonoBehaviour
 
         for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
         {
-            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOption);
+            print("Executed");
+            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOptionGlobal);
+            imageAssociationTestScript.didPlayerPickAnOptionGlobal = false;
+            print("Hey");
 
-            imageAssociationTestScript.didPlayerPickAnOption = false;
             yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
         }
 

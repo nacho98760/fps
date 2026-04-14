@@ -20,7 +20,8 @@ public class ImageAssociationTestScript : MonoBehaviour
     [SerializeField] private Material secondScreenMaterial;
     [SerializeField] private Material imageOptionButtonMaterial;
 
-    [NonSerialized] public bool didPlayerPickAnOption = false;
+    [NonSerialized] public bool didPlayerPickAnOptionLocal = false;
+    [NonSerialized] public bool didPlayerPickAnOptionGlobal = false;
     [NonSerialized] public bool isPlayerAbleToPlay = false;
 
     string[] textsForParkImage = { "Park", "Tree", "Calm", "Green" };
@@ -28,6 +29,8 @@ public class ImageAssociationTestScript : MonoBehaviour
     string[] textsForRoomImage = { "Cozy", "Wood", "Carpet", "Plant" };
 
     [NonSerialized] public bool didImageOptionsEnded = false;
+
+    [NonSerialized] public bool isItTheFirstImage = false;
 
     private void Awake()
     {
@@ -58,6 +61,8 @@ public class ImageAssociationTestScript : MonoBehaviour
         {
             numberOfImagesToShow++;
         }
+
+        print("Images to show: " + numberOfImagesToShow.ToString());
     }
 
 
@@ -65,8 +70,7 @@ public class ImageAssociationTestScript : MonoBehaviour
     {
         yield return new WaitForSeconds(11f);
 
-        bool isItTheFirstImage = true;
-
+        isItTheFirstImage = true;
         foreach (Material imageMaterial in imageMaterials)
         {
             if (isItTheFirstImage)
@@ -78,7 +82,9 @@ public class ImageAssociationTestScript : MonoBehaviour
             }
             else
             {
-                yield return new WaitUntil(() => didPlayerPickAnOption);
+                yield return new WaitUntil(() => didPlayerPickAnOptionLocal);
+                didPlayerPickAnOptionLocal = false;
+                //--
 
                 print("Here2");
 

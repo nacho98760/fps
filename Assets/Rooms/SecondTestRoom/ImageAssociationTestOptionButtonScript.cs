@@ -15,8 +15,9 @@ public class ImageAssociationTestOptionButtonScript : MonoBehaviour
     {
         if (imageAssociationTestScript.isPlayerAbleToPlay)
         {
-            print(textAssociatedWithThisButton.text);
-            imageAssociationTestScript.didPlayerPickAnOption = true;
+            imageAssociationTestScript.didPlayerPickAnOptionLocal = true;
+            imageAssociationTestScript.didPlayerPickAnOptionGlobal = true;
+
             imageAssociationTestScript.isPlayerAbleToPlay = false;
 
             if (imageAssociationTestScript.didImageOptionsEnded)

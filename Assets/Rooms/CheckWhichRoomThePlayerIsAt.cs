@@ -16,6 +16,7 @@ public class CheckWhichRoomThePlayerIsAt : MonoBehaviour
             if (transform.root.name != playerScript.playerCurrentRoom)
             {
                 playerScript.playerCurrentRoom = transform.root.name;
+                print(playerScript.playerCurrentRoom);
             }
         }
     }
