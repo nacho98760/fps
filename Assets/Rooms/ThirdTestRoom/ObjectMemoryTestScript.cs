@@ -43,10 +43,14 @@ public class ObjectMemoryTestScript : MonoBehaviour
 
     private void HandleNarrativeEvent(string eventName, List<string> dialogues)
     {
+        if (eventName == "Middle of Hallway 3")
+        {
+            firstRoundSlots.SetActive(true);
+        }
+
         if (eventName == "First variant of ObjectMemoryTest")
         {
             slotsToShuffle = firstRoundSlots;
-            firstRoundSlots.SetActive(true);
         }
         if (eventName == "Second variant of ObjectMemoryTest")
         {

@@ -34,22 +34,28 @@ public class NarrativeManager : MonoBehaviour
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        playerScript.playerCurrentRoom = "Hallway2";
-        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room3");
+        playerScript.playerCurrentRoom = "Hallway3";
+        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room4");
 
-        yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
+        yield return StartCoroutine(TriggerEventAndWait("First variant of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Advice on cameras"));
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
+        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
 
-        for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)
-        {
-            print("Executed");
-            yield return new WaitUntil(() => imageAssociationTestScript.didPlayerPickAnOptionGlobal);
-            imageAssociationTestScript.didPlayerPickAnOptionGlobal = false;
-            print("Hey");
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
 
-            yield return StartCoroutine(TriggerEventAndWait("In-between association images dialogue"));
-        }
+        yield return StartCoroutine(TriggerEventAndWait("Second variant of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
+        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
 
-        yield return StartCoroutine(TriggerEventAndWait("End of ImageAssociationTest"));
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+
+        yield return StartCoroutine(TriggerEventAndWait("Third variant of ObjectMemoryTest"));
+        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
+        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
+
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
     }
 
 
@@ -111,6 +117,7 @@ public class NarrativeManager : MonoBehaviour
         yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
 
         yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
     }
 
 

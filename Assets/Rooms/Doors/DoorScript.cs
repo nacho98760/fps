@@ -147,7 +147,7 @@ public class DoorScript : MonoBehaviour
                 break;
 
 
-            case "Start of ObjectMemoryTest":
+            case "First variant of ObjectMemoryTest":
 
                 if (transform.name == "HallwayDoor3")
                 {

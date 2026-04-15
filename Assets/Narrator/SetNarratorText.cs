@@ -107,7 +107,7 @@ public class SetNarratorText : MonoBehaviour
                 break;
 
             case "Advice on cameras":
-                QueueDialogue(dialogues[0], 6f);
+                QueueDialogue(dialogues[0], 10f);
                 break;
 
             case "Second variant of ObjectMemoryTest":
