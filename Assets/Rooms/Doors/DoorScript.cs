@@ -66,7 +66,7 @@ public class DoorScript : MonoBehaviour
         {
             case "Player Spawn Event":
 
-                if (transform.name == "Door1")
+                if (transform.name == "Door1" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -75,11 +75,11 @@ public class DoorScript : MonoBehaviour
 
             case "Middle of Hallway 1":
 
-                if (transform.name == "Door1")
+                if (transform.name == "Door1" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
-                if (transform.name == "HallwayDoor1")
+                if (transform.name == "HallwayDoor1" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -88,7 +88,7 @@ public class DoorScript : MonoBehaviour
 
             case "First variant of ColorPatternTest":
 
-                if (transform.name == "HallwayDoor1")
+                if (transform.name == "HallwayDoor1" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
@@ -96,7 +96,7 @@ public class DoorScript : MonoBehaviour
 
 
             case "End of ColorPatternTest":
-                if (transform.name == "Door2")
+                if (transform.name == "Door2" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -105,11 +105,11 @@ public class DoorScript : MonoBehaviour
 
             case "Middle of Hallway 2":
 
-                if (transform.name == "Door2")
+                if (transform.name == "Door2" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
-                if (transform.name == "HallwayDoor2")
+                if (transform.name == "HallwayDoor2" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -118,7 +118,7 @@ public class DoorScript : MonoBehaviour
 
             case "Start of ImageAssociationTest":
 
-                if (transform.name == "HallwayDoor2")
+                if (transform.name == "HallwayDoor2" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
@@ -127,7 +127,7 @@ public class DoorScript : MonoBehaviour
 
             case "End of ImageAssociationTest":
 
-                if (transform.name == "Door3")
+                if (transform.name == "Door3" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -136,11 +136,11 @@ public class DoorScript : MonoBehaviour
 
             case "Middle of Hallway 3":
 
-                if (transform.name == "Door3")
+                if (transform.name == "Door3" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
-                if (transform.name == "HallwayDoor3")
+                if (transform.name == "HallwayDoor3" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -149,7 +149,7 @@ public class DoorScript : MonoBehaviour
 
             case "First variant of ObjectMemoryTest":
 
-                if (transform.name == "HallwayDoor3")
+                if (transform.name == "HallwayDoor3" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
@@ -158,7 +158,7 @@ public class DoorScript : MonoBehaviour
 
             case "End of ObjectMemoryTest":
 
-                if (transform.name == "Door4")
+                if (transform.name == "Door4" && isDoorClosed)
                 {
                     StartCoroutine(OpenDoor());
                 }
@@ -167,12 +167,13 @@ public class DoorScript : MonoBehaviour
 
             case "Middle of Hallway 4":
 
-                if (transform.name == "Door4")
+                if (transform.name == "Door4" && isDoorClosed == false)
                 {
                     StartCoroutine(CloseDoor());
                 }
-                if (transform.name == "HallwayDoor4")
+                if (transform.name == "HallwayDoor4" && isDoorClosed)
                 {
+                    print("Hey");
                     StartCoroutine(OpenDoor());
                 }
                 break;
