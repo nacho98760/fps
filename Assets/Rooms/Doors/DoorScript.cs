@@ -171,11 +171,6 @@ public class DoorScript : MonoBehaviour
                 {
                     StartCoroutine(CloseDoor());
                 }
-                if (transform.name == "HallwayDoor4" && isDoorClosed)
-                {
-                    print("Hey");
-                    StartCoroutine(OpenDoor());
-                }
                 break;
         }
     }

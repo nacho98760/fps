@@ -34,27 +34,7 @@ public class NarrativeManager : MonoBehaviour
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        playerScript.playerCurrentRoom = "Hallway3";
-        yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room4");
-
-        yield return StartCoroutine(TriggerEventAndWait("First variant of ObjectMemoryTest"));
-        yield return StartCoroutine(TriggerEventAndWait("Advice on cameras"));
-        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
-
-        yield return StartCoroutine(TriggerEventAndWait("Second variant of ObjectMemoryTest"));
-        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
-
-        yield return StartCoroutine(TriggerEventAndWait("Third variant of ObjectMemoryTest"));
-        yield return StartCoroutine(TriggerEventAndWait("Blackout"));
-        yield return new WaitUntil(() => objectMemoryTestScript.isSlotObjectSequenceCorrect);
-
-        yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest Round"));
+        playerScript.playerCurrentRoom = "Room4";
         yield return StartCoroutine(TriggerEventAndWait("End of ObjectMemoryTest"));
     }
 

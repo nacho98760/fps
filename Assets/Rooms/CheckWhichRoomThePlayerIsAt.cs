@@ -13,8 +13,10 @@ public class CheckWhichRoomThePlayerIsAt : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            print("Yes Player");
             if (transform.root.name != playerScript.playerCurrentRoom)
             {
+                print("Yes room");
                 playerScript.playerCurrentRoom = transform.root.name;
                 print(playerScript.playerCurrentRoom);
             }
