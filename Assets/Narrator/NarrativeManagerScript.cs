@@ -29,12 +29,12 @@ public class NarrativeManager : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(GameSequence());
-        StartCoroutine(GameSequenceUsedForTesting());
+        playerScript.playerCurrentRoom = "Hallway4";
     }
 
     private IEnumerator GameSequenceUsedForTesting()
     {
-        playerScript.playerCurrentRoom = "Room3";
+        playerScript.playerCurrentRoom = "Room4";
         yield return StartCoroutine(TriggerEventAndWait("Start of ImageAssociationTest"));
 
         for (int i = 0; i < imageAssociationTestScript.numberOfImagesToShow; i++)

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ChangeCameraVisibilityScript : MonoBehaviour
 {
-    [SerializeField] private GameObject actualCameraPart;
-
     [SerializeField] private NarrativeManager narrativeManager;
 
     private void Awake()
@@ -17,7 +15,7 @@ public class ChangeCameraVisibilityScript : MonoBehaviour
     {
         if (eventName == "Advice on cameras")
         {
-            actualCameraPart.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
