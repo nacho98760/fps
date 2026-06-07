@@ -13,6 +13,7 @@ public class NarrativeManager : MonoBehaviour
     [SerializeField] private ColorPatternTestScript colorPatternTestScript;
     [SerializeField] private ImageAssociationTestScript imageAssociationTestScript;
     [SerializeField] private ObjectMemoryTestScript objectMemoryTestScript;
+    [SerializeField] private MainMenuScript mainMenuScript;
 
     private PlayerMovement playerScript;
     private Dictionary<string, NarrativeEvent> eventMap;
@@ -28,8 +29,8 @@ public class NarrativeManager : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(GameSequence());
-        playerScript.playerCurrentRoom = "Hallway4";
+        StartCoroutine(GameSequence());
+        //StartCoroutine(GameSequenceUsedForTesting());
     }
 
     private IEnumerator GameSequenceUsedForTesting()
@@ -53,6 +54,7 @@ public class NarrativeManager : MonoBehaviour
 
     private IEnumerator GameSequence()
     {
+        yield return new WaitUntil(() => mainMenuScript.mainMenuEnabled == false);
         yield return StartCoroutine(TriggerEventAndWait("Player Spawn Event"));
 
         yield return new WaitUntil(() => playerScript.playerCurrentRoom == "Room2");

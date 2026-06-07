@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private MainMenuScript mainMenuScript;
+
     public string playerCurrentRoom;
     [SerializeField] Transform firstRoomSpawnPoint;
 
@@ -15,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private AudioSource footstepsSound;
 
-    float movementSpeed = 1.7f;
+    float movementSpeed = 1f;
 
     bool isGrounded;
 
@@ -51,6 +53,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //Get Player's Input + Extra fall gravity tp make the jump less smooth
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (playerRigidBody.linearVelocity.y < 0)
+        {
+            playerRigidBody.AddForce(Vector3.down * 2.5f, ForceMode.Acceleration);
+        }
+
         MovePlayer();
         SpeedControl();
         CheckForWalkingSound();
@@ -58,38 +69,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, solidObjectLayer);
-
-        if (isGrounded)
-        {
-            playerRigidBody.linearDamping = groundDrag;
-        }
-        else
-        {
-            playerRigidBody.linearDamping = 0f;
-        }
-
-        movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
-        playerRigidBody.AddForce(movementDirection * movementSpeed * 25f, ForceMode.Acceleration);
-
-        //Keep an eye on this
-        if (isGrounded && movementDirection.sqrMagnitude < 0.01f)
-        {
-            playerRigidBody.linearVelocity = new Vector3(0f, playerRigidBody.linearVelocity.y, 0f);
-        }
+        MovePlayer();
     }
 
 
-    // ----------------------------- Player Movement - START -----------------------------
     private void MovePlayer()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-        
-        //Extra fall gravity tp make the jump less smooth
-        if (playerRigidBody.linearVelocity.y < 0)
+        if (mainMenuScript.mainMenuEnabled == false)
         {
-            playerRigidBody.AddForce(Vector3.down * 2.5f, ForceMode.Acceleration);
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, solidObjectLayer);
+
+            if (isGrounded)
+            {
+                playerRigidBody.linearDamping = groundDrag;
+            }
+            else
+            {
+                playerRigidBody.linearDamping = 0f;
+            }
+
+            movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+            playerRigidBody.AddForce(movementDirection * movementSpeed * 25f, ForceMode.Acceleration);
+
+            //Keep an eye on this
+            if (isGrounded && movementDirection.sqrMagnitude < 0.01f)
+            {
+                playerRigidBody.linearVelocity = new Vector3(0f, playerRigidBody.linearVelocity.y, 0f);
+            }
         }
     }
 
@@ -105,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
 
         isPlayerMoving = (flatVelocity.magnitude > 0.1f);
     }
-    // ----------------------------- Player Movement - END -----------------------------
 
 
     private void CheckForWalkingSound()
