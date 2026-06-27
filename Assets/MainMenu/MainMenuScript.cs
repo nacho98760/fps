@@ -12,6 +12,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayGame()
     {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         gameObject.SetActive(false);
         mainMenuEnabled = false;
     }
@@ -23,6 +24,6 @@ public class MainMenuScript : MonoBehaviour
 
     public void QuitGame()
     {
-        print("Not implemented yet");
+        Application.Quit();
     }
 }
