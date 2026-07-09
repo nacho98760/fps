@@ -15,7 +15,7 @@ public class BehindTheScenesRoomScript : MonoBehaviour
         objRenderer = GetComponent<Renderer>();
     }
 
-    void Update()
+    private void Update()
     {
         if (playerScript.playerCurrentRoom == "StaffRoom")
         {

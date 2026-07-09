@@ -1,13 +1,21 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public bool mainMenuEnabled;
+    [SerializeField] private GameObject generalPanel;
+    [SerializeField] private GameObject settingsPanel;
 
-    void Start()
+    [SerializeField] private Button goBackButton;
+
+    [NonSerialized] public bool mainMenuEnabled;
+
+    private void Start()
     {
         mainMenuEnabled = true;
+        gameObject.SetActive(true);
+        generalPanel.SetActive(true);
     }
 
     public void PlayGame()
@@ -19,11 +27,18 @@ public class MainMenuScript : MonoBehaviour
 
     public void ShowSettings()
     {
-        print("Not implemented yet");
+        settingsPanel.SetActive(true);
+        generalPanel.SetActive(false);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void OnGoBackButtonClicked()
+    {
+        settingsPanel.SetActive(false);
+        generalPanel.SetActive(true);
     }
 }

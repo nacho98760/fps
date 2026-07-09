@@ -24,7 +24,7 @@ public class DoorScript : MonoBehaviour
         doorSound = GetComponent<AudioSource>();
     }
 
-    void Start()
+    private void Start()
     {
         isDoorClosed = true;
         doorClosedRotation = transform.localRotation;

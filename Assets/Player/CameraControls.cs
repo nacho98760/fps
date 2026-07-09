@@ -14,7 +14,7 @@ public class CameraControls : MonoBehaviour
 
     bool mouseInitialized = false;
 
-    void Awake()
+    private void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -34,7 +34,7 @@ public class CameraControls : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (!mouseInitialized)
         {
